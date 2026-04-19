@@ -22,10 +22,10 @@ Documentation and KiCad schematic files for a custom LED lighting system install
 | [power.md](docs/power.md) | Power system (battery, BMS, buck converter, switch), control system (ESP32-S3, PCA9685, web UI), wire gauge, core BOM, prototyping plan |
 | [blaster.md](docs/blaster.md) | Laser blaster arm — barrels, heatsink zones, firing sequence (idle/prime/charge/discharge), MOSFET drive circuit, blaster BOM |
 | [head.md](docs/head.md) | Head zones — fiber optic eyes, brain (3-channel pulse), red sensor eye, mouth, startup sequence |
-| [power_fist.md](docs/power_fist.md) | Left arm power fist — clear resin knuckles, channel 4 pulse effect |
+| [power-fist.md](docs/power-fist.md) | Left arm power fist — clear resin knuckles, channel 4 pulse effect |
 | [torso.md](docs/torso.md) | Torso cavity dimensions, component fit, connector strategy, mounting tray design, tank fire LED kit and wire routing |
-| [build_roadmap.md](docs/build_roadmap.md) | Three-phase build plan (breadboard → perfboard → custom PCB), torso PCB constraints, open items |
-| [schematic_progress.md](docs/schematic_progress.md) | KiCad session-by-session tracker — what's been placed, wired, and verified; locked electrical decisions |
+| [build-roadmap.md](docs/build-roadmap.md) | Three-phase build plan (breadboard → perfboard → custom PCB), torso PCB constraints, open items |
+| [schematic-progress.md](docs/schematic-progress.md) | KiCad session-by-session tracker — what's been placed, wired, and verified; locked electrical decisions |
 
 ### `kicad/`
 
@@ -38,7 +38,7 @@ KiCad 10 project files. The schematic is built in sheets:
 | Sheet 3 — Head zones (Ch 0–3, 10–11) | Not started |
 | Sheet 4 — Power fist (Ch 4) | Not started |
 
-See [docs/schematic_progress.md](docs/schematic_progress.md) for current KiCad status and session notes.
+See [docs/schematic-progress.md](docs/schematic-progress.md) for current KiCad status and session notes.
 
 ---
 
@@ -78,7 +78,7 @@ Full details → [docs/power.md](docs/power.md)
 - [ ] One blaster MOSFET channel (Q1) verified
 - [ ] Web UI controlling LED rope brightness from phone
 
-See [docs/build_roadmap.md](docs/build_roadmap.md) for the full phase plan and open items.
+See [docs/build-roadmap.md](docs/build-roadmap.md) for the full phase plan and open items.
 
 ---
 
