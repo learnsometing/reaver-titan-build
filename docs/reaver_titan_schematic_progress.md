@@ -3,13 +3,13 @@
 **Project:** Reaver Titan Electrical System  
 **KiCad version:** 10.0 (Windows)  
 **Brief version:** v5.2  
-**Schematic revision:** v1.0  
+**Schematic revision:** v1.1  
 
 ---
 
 ## Context
 
-Warhammer 40K Reaver Titan, Emperor's Children chaos build. Slaanesh daemon-touched aesthetic. All lighting is green. Full lighting design is documented in the brief (v5.1). We are building the schematic incrementally in KiCad, learning the tool as we go.
+Warhammer 40K Reaver Titan, Emperor's Children chaos build. Slaanesh daemon-touched aesthetic. All lighting is green. Full lighting design is documented in the brief (v5.2). We are building the schematic incrementally in KiCad, learning the tool as we go.
 
 The schematic will be built in sections. This tracker covers the **core power system** first, then expands to zone loads.
 
@@ -34,6 +34,7 @@ The schematic will be built in sections. This tracker covers the **core power sy
 ### Power symbols placed
 - [x] **+BATT** power symbol — top left area
 - [x] **GND** power symbol — placed nearby
+- [x] **PWR_FLAG** — placed on +BATT net and GND net
 
 ### Components placed and labelled
 
@@ -42,6 +43,11 @@ The schematic will be built in sections. This tracker covers the **core power sy
 | BT1 | Device:Battery | Zeee 2S 2200mAh 7.4V | Positive pin wired to +BATT net, negative to GND |
 | J1 | Connector:Conn_01x02 | T-Connector Deans 14AWG | Pin 1 on +BATT net, Pin 2 on GND |
 | U1 | Connector:Conn_01x04 | JZK 2S 7.4V 8A BMS | 4-pin generic module |
+| SW1 | SW_Push_Latching | Latching Push Button | Pin 1 on +PROT net, Pin 2 on +SWITCHED net |
+| U2 | Connector:Conn_01x04 | MP1584 Buck Converter 5V | Pin 1 +SWITCHED, Pin 2 GND, Pin 3 +5V, Pin 4 GND. Text note: set output to 5.0V before connecting load |
+| U3 | Connector:Conn_01x04 | ESP32-S3 Super Mini | Pin 1 +5V, Pin 2 GND, Pin 3 I2C_SDA, Pin 4 I2C_SCL |
+| U4 | Connector:Conn_01x04 | PCA9685 16-ch PWM Driver | Pin 1 +5V, Pin 2 GND, Pin 3 I2C_SDA, Pin 4 I2C_SCL |
+| D1 | Device:LED | Evan Designs Tank Fire LED Kit 5V | Direct 5V bus, anode on +5V net, cathode on GND |
 
 ### Net labels placed on U1 (BMS)
 
@@ -58,105 +64,78 @@ The schematic will be built in sections. This tracker covers the **core power sy
 - J1 pin 2 → GND
 - U1 pin 1 → +BATT net (via net label)
 - U1 pin 2 → GND (via net label)
-- U1 pin 3 → +PROT net label (not yet connected forward — next session)
+- U1 pin 3 → +PROT net label
 - U1 pin 4 → GND (via net label)
+- SW1 pin 1 → +PROT net (connects to U1 pin 3)
+- SW1 pin 2 → +SWITCHED net
+- U2 pin 1 → +SWITCHED net, pin 2 → GND, pin 3 → +5V, pin 4 → GND
+- U3 pin 1 → +5V, pin 2 → GND, pin 3 → I2C_SDA, pin 4 → I2C_SCL
+- U4 pin 1 → +5V, pin 2 → GND, pin 3 → I2C_SDA, pin 4 → I2C_SCL (I2C nets auto-connect U3 and U4)
+- D1 anode → +5V, cathode → GND
+
+### Power chain (complete)
+
+```
+BT1 (LiPo) → J1 (T-connector) → U1 (BMS) → SW1 (switch) → U2 (buck) → +5V bus
+                                                                              ↓
+                                                              U3 (ESP32) + U4 (PCA9685) + D1 (tank fire)
+```
 
 ### ERC status
-Run after placing BT1, J1, U1. Results:
-- 2x `power_pin_not_driven` errors — expected, will fix with PWR_FLAG symbols at end
-- 1x `isolated_pin_label` warning on +PROT — expected, nothing connected to it yet
-- **No real wiring errors**
+Run after completing core power system. Results:
+- **Zero errors**
+- **Zero warnings**
+- Ignored tests present — expected, KiCad defaults, no real errors suppressed
 
 ---
 
-## Up Next (start here next session)
+## Up Next — Zone loads (blaster channels)
 
-### 1. Place SW1 — Power switch ✅ Decision: INCLUDE
+The core power sheet is complete. The next session starts the zone load work. The most complex zone is the blaster arm — five PCA9685 channels (5–9), each driving LED rope segments through an IRLML6344 N-channel MOSFET.
 
-Press **A**, search `SW_Push_Latching`, place to the right of U1.
-- Reference: SW1
-- Value: Latching Push Button
+### Circuit pattern (repeated for each blaster channel)
 
-Wire: +PROT net label on SW1 pin 1. New net label on SW1 pin 2: **+SWITCHED**
+```
++5V ──────────────────────── LED rope anode
+                                    │
+                              LED rope cathode
+                                    │
+                               6.8Ω 1W resistor
+                                    │
+                              MOSFET drain (IRLML6344)
+                              MOSFET source ── GND
+                              MOSFET gate ──── PCA9685 output pin
+                                    │
+                               10kΩ pull-down
+                                    │
+                                   GND
+```
 
-> **Decision rationale:** The switch is hidden in the torso exterior and provides a clean hard disconnect during display sessions without opening the model or unplugging the battery. The battery is still always physically unplugged at the T-connector when not in use (LiPo fire safety). The switch is purely for display convenience.
+**Build one channel first, verify it, then copy it four times** for the remaining blaster channels.
 
----
+### Blaster channels to build
 
-### 2. Place U2 — Buck converter
+| Channel | Zone | Ref (planned) |
+|---------|------|---------------|
+| 5 | Blaster barrels | Q1 |
+| 6 | Heatsink rear (gaps 1–3) | Q2 |
+| 7 | Heatsink mid-rear (gaps 4–5) | Q3 |
+| 8 | Heatsink mid-front (gaps 6–8) | Q4 |
+| 9 | Heatsink front (gaps 9–10) | Q5 |
 
-**A** → search `Conn_01x04` (same generic 4-pin module as U1)
-- Reference: U2
-- Value: MP1584 Buck Converter 5V
+Series resistor for all blaster channels: **6.8Ω 1W** (yields ~294mA at 5V with 3.0V LED rope Vf). Consider 8.2Ω for more thermal margin.
 
-Pins:
-| Pin | Net label |
-|-----|-----------|
-| 1 | +SWITCHED (from SW1 pin 2) |
-| 2 | GND |
-| 3 | +5V |
-| 4 | GND |
+### After blaster channels — direct-drive head zones
 
-Add a text note near U2: **"Set output to 5.0V with multimeter BEFORE connecting load"**
+Simpler circuits, no MOSFET needed for single-LED channels:
 
----
-
-### 3. Place U3 — ESP32-S3 Super Mini
-
-**A** → search `Conn_01x04` (or a larger connector if you want more pins represented)
-- Reference: U3
-- Value: ESP32-S3 Super Mini
-
-Minimum pins to show:
-| Pin | Net label |
-|-----|-----------|
-| 1 | +5V |
-| 2 | GND |
-| 3 | I2C_SDA |
-| 4 | I2C_SCL |
-
----
-
-### 4. Place U4 — PCA9685 PWM driver
-
-**A** → search `Conn_01x04`
-- Reference: U4
-- Value: PCA9685 16-ch PWM Driver
-
-Minimum pins to show:
-| Pin | Net label |
-|-----|-----------|
-| 1 | +5V |
-| 2 | GND |
-| 3 | I2C_SDA |
-| 4 | I2C_SCL |
-
-I2C_SDA and I2C_SCL net labels will connect U3 and U4 automatically.
-
----
-
-### 5. Place J2 — Tank fire LED kit (direct 5V bus)
-
-**A** → search `Conn_01x02`
-- Reference: J2
-- Value: Evan Designs Tank Fire LED Kit 5-12V
-
-| Pin | Net label |
-|-----|-----------|
-| 1 | +5V |
-| 2 | GND |
-
----
-
-### 6. Add PWR_FLAG symbols (fixes ERC errors)
-
-**A** → search `PWR_FLAG`. Place one on the **+BATT** net and one on the **GND** net. These tell KiCad's ERC that these nets are intentionally driven by a power source.
-
----
-
-### 7. Run final ERC
-
-Should be clean (zero errors, zero warnings) after PWR_FLAGs are added and all pins are connected.
+| Ch | Zone | Circuit |
+|----|------|---------|
+| 0 | Eyes (fiber optic) | 150Ω resistor, direct PCA9685 drive, ~20mA |
+| 10 | Sensor eye (red) | 100Ω resistor, direct PCA9685 drive, ~20mA |
+| 11 | Mouth | Evan Designs 5V chip LED, direct PCA9685 drive |
+| 1–3 | Brain A/B/C | TBD — direct drive if 1 LED per channel; MOSFET if 2+ |
+| 4 | Power fist knuckles | 100Ω/LED, direct or MOSFET TBD |
 
 ---
 
@@ -178,7 +157,7 @@ Should be clean (zero errors, zero warnings) after PWR_FLAGs are added and all p
 | 11 | Mouth | Organic breathing rhythm | Direct, Evan Designs 5V chip LED |
 | 12–15 | Unassigned | — | Reserved (wings, base, trophies) |
 
-Tank fire LED kit: direct 5V bus, no PCA9685 channel needed.
+Tank fire LED kit (D1): direct 5V bus, no PCA9685 channel needed.
 
 ---
 
@@ -193,4 +172,5 @@ Tank fire LED kit: direct 5V bus, no PCA9685 channel needed.
 - **Wire gauge:** 14 AWG silicone on 7.4V side; 22 AWG stranded on 5V side
 - **MOSFET:** IRLML6344 (SOT-23) for all high-current LED rope channels
 - **Power switch:** Latching push button (SW1), hidden in torso exterior — for display session convenience. Battery always unplugged at T-connector when not in use.
+- **Tank fire LED kit:** Represented as D1 (Device:LED symbol), direct 5V bus
 - **All LEDs:** Green throughout. Clear resin parts used for diffusion.
