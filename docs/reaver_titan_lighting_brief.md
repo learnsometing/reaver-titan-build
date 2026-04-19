@@ -2,12 +2,6 @@
 
 *Emperor's Children | Chaos Reaver | Slaanesh Daemon-Touched*
 
-| | |
-|---|---|
-| **Version** | 5.3 — Power switch specified, LED rope confirmed, blaster zone BOM added |
-| **Status** | Prototyping phase — core power and blaster zone |
-| **Date** | April 2026 |
-
 ---
 
 ## 1. Concept
@@ -23,7 +17,7 @@ All lighting is green throughout. Clear resin parts are used extensively to diff
 | Component | Specification |
 |---|---|
 | **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo (soft pack). Dimensions: 73mm × 34mm × 18.5mm, weight 98g. T-connector (Deans) discharge plug, JST-XH balance lead. Removable via torso access panel for external charging. 2-pack purchased — one spare for swap-out during extended display |
-| **Connector** | T-connector (Deans) for battery-to-bus connection. Rated for high current, eliminates the JST undersizing concern flagged in earlier revisions. Internal bus wiring terminates in a matching T-connector for battery plug-in |
+| **Connector** | T-connector (Deans) for battery-to-bus connection. Rated for high current, eliminates JST undersizing concerns. Internal bus wiring terminates in a matching T-connector for battery plug-in |
 | **Protection** | JZK 2S 7.4V 8A BMS protection board (41mm × 16mm × 3.5mm). Over-charge protection (4.25–4.35V per cell), over-discharge protection (2.5–3.0V), short circuit protection, standby current less than 10μA. 8A continuous / 10A peak — provides ample headroom over estimated 2A peak system draw |
 | **Charger** | 2S LiPo balance charger required (not included with battery). Must support JST-XH balance lead. Battery is removed from model and charged externally |
 | **Voltage regulation** | 5V buck converter, minimum 3A rated. A 5A-rated adjustable buck module is recommended for expansion headroom (current peak draw is approximately 2A, but additional zones will increase this). MP1584 (2–3A) is acceptable for prototyping; consider upgrading to a 5A module (e.g., D24V50F5 or similar) for the final build if total draw exceeds 2.5A |
@@ -301,7 +295,7 @@ Total tray footprint fits within the 63mm × 78mm main area with the 27mm notch 
 - **Tank fire kit:** Evan Designs 5–12V version, self-contained with built-in resistors and flicker circuits. Connects directly to 5V/GND bus. Estimated draw approximately 60mA (3 LEDs at approximately 20mA each)
 - **LED rope segments:** 1.5mm overall diameter including green silicone diffusion sleeve. Forward voltage 2.7–3.1V (confirmed from packaging), maximum current 300mA (confirmed from packaging — Amazon listing shows 30mA which is a per-segment test condition, not maximum). On hand — two lengths from same supplier, same luminosity. Cannot be cut; insert designs will be modelled around fixed rope lengths. Requires MOSFET driver per channel (see Section 5.4)
 - **Blaster MOSFET driver:** IRLML6344 (SOT-23, logic-level N-channel) per channel, with 10kΩ gate pull-down resistor. Series current-limiting resistor: 6.8Ω 1W (max brightness, approximately 294mA) or 8.2Ω 1W (derated, approximately 244mA). 5 MOSFET circuits total for blaster channels
-- **Battery connector:** T-connector (Deans) rated for high current. Eliminates the JST undersizing concern from earlier revisions. Peak system draw of approximately 2A is well within T-connector ratings
+- **Battery connector:** T-connector (Deans) rated for high current. Peak system draw of approximately 2A is well within T-connector ratings
 - **BMS:** JZK 2S 7.4V 8A board confirmed. Over-charge 4.25–4.35V, over-discharge 2.5–3.0V, short circuit protection. 8A continuous rating provides 4x headroom over estimated 2A peak draw
 - **Buck converter:** MP1584 (2–3A) acceptable for prototyping. Recommend upgrading to a 5A-rated module for the final build to provide expansion headroom. Verify specific board rating before purchase — some MP1584 boards are only 2A
 - **Wire gauge — 7.4V side** (battery to BMS to switch to buck converter input): 14 AWG stranded silicone wire. Carries full system current at battery voltage. Pre-wired T-connector leads are typically 14 AWG
@@ -378,24 +372,3 @@ Goal: verify the entire power chain from battery to visible LED output on a brea
 PCA9685 channels 12–15 are unassigned and available for future lighting zones such as wing lights, base effects, trophy glow, or additional weapon effects. A second PCA9685 can be daisy-chained on the same I2C bus if more than 16 total channels are ever needed.
 
 All GPIO pins on the ESP32-S3 are free for input use (buttons, sensors, mode switches) since no PWM output is handled by the microcontroller directly. The ESP32-S3's WiFi capability also enables future features such as OTA (over-the-air) firmware updates, integration with home automation systems, or synchronised effects across multiple models.
-
----
-
-## Revision Log
-
-| Version | Date | Changes |
-|---|---|---|
-| 1.0 | Apr 2026 | Initial design brief — Arduino Uno, 6 native PWM channels, blaster as single static glow zone |
-| 2.0 | Apr 2026 | Replaced Uno with Nano. Added PCA9685 PWM driver (16 channels, 12-bit, I2C). Expanded blaster to 5 channels (barrels + 4 heatsink zones). Defined multi-state firing sequence (idle/prime/charge/discharge). Documented LED rope specs and heatsink zone grouping. Added prototyping plan |
-| 2.1 | Apr 2026 | Confirmed LED rope electrical specs (2.7–3.0V Vf, 300mA max). Added MOSFET driver circuit design (IRLML6344) for all 5 blaster channels. Defined series resistor values for max brightness (6.8Ω) and derated (8.2Ω) options. Updated JST connector current concerns — may need XT30 upgrade. PCA9685 supplier confirmed as SunFounder |
-| 3.0 | Apr 2026 | Complete head redesign. Eyes changed to fiber optic (4 strands from 1x 5mm green LED, 150Ω, Ch 0) with warm-up ramp on power-on. Added red sensor eye (3V Evan Designs chip + 100Ω, Ch 10) with periodic blink. Added mouth zone (5V green Evan Designs chip, Ch 11) with organic breathing rhythm, loosely related to brain tempo. Brain LED count left as open item pending print design and diffusion prototyping. Defined head startup sequence (eyes → brain → mouth). Expanded electrical notes with per-zone LED specs. 12 of 16 PCA9685 channels now allocated |
-| 3.1 | Apr 2026 | Expanded tank fire section with full wire routing plan (tank → foot → leg channel → pelvis → torso). Fire kit to be repurchased as 5–12V version with 14-inch wire. Right leg to be reprinted with hollow wire channel (5–6mm ID, oversized for future use). Left leg solid. Added Section 8: Connector Strategy — Dupont connectors at all major body joints (pelvis, shoulders, neck) for modular assembly. Added PCB consolidation roadmap (Section 8.3). Tank stands as base for right foot, no separate model base |
-| 3.2 | Apr 2026 | Power system fully specified. Battery: Zeee 2S 2200mAh 50C Shorty LiPo (73×34×18.5mm, T-connector, 2-pack). BMS: JZK 2S 7.4V 8A (41×16×3.5mm, over-charge/discharge/short circuit protection). Battery connector changed from JST to T-connector (Deans) — resolves previous current rating concern. Added runtime estimates, charger requirement note, and updated architecture summary. Firing sequence revised: energy now originates at rear reactor/heatsink and propagates forward, rear zone never fully dark |
-| 4.0 | Apr 2026 | Added Section 9: Torso Cavity and Component Layout. Documented cavity dimensions (63×78mm main area, 27mm centered notch to 110mm total width, 45mm height with stepped shelf). Magnetic removable top armor plate for access. Wire exits: 10mm shoulder holes at 30mm height on both sides, pelvis hole center floor, neck hole front-right floor. 3D-printed drop-in mounting tray concept for prototype phase. Component fit analysis confirms all boards plus battery within 45mm height ceiling. Buck converter spec updated: recommend 5A-rated module for expansion headroom (MP1584 acceptable for prototyping only) |
-| 4.1 | Apr 2026 | Corrected torso cavity side profile: front-left corner is a stepped cutout (wall rises 25mm, steps inward 20mm, then rises 20mm to ceiling), not a downward shelf. Usable height is 25mm in cutout zone, full 45mm elsewhere. Battery must sit in full-height zone. Added Section 9.4: Central Junction (perfboard with 5V/GND bus and zone pin headers). Added Section 11: Core Power System BOM with all components needed to prototype the drop-in tray. Tools assumed on hand |
-| 5.0 | Apr 2026 | Major architecture change: replaced Arduino Nano with ESP32-S3 Super Mini (22.52×18mm, dual-core 240MHz, WiFi, BLE). Enables full remote control via web browser — no app needed. Added Section 3.3: Remote Control (web UI with zone toggles, brightness sliders, firing triggers, display mode presets). Physical power switch removed; battery is always unplugged at T-connector when not in use. Blaster trigger method updated to web interface. Updated BOM, component fit table, runtime estimates (higher ESP32 power draw), and all Nano references throughout. Expansion section updated with OTA and multi-model sync possibilities |
-| 5.3 | Apr 2026 | Power switch specified: Twidec L-PBS-110-XBK 7mm latching push button, mounted through existing torso exterior rectangular housing feature. Indicator LED planned for domed feature above switch, wired to +SWITCHED net. LED rope confirmed on hand: 1.5mm overall diameter with green silicone diffusion sleeve, Vf 2.7–3.1V, max 300mA, two fixed-length ropes from same supplier. Cannot be cut — insert designs will be modelled around rope lengths. LED rope specs updated throughout (sections 5.1, 5.2, 10). Blaster zone BOM added as Section 11.2. Resistor assortment (BOJACK B08FD1XVL6, 25 values 1/4W) added to core BOM. Status updated to prototyping phase |
-
----
-
-*Emperor's Children — Slaanesh Daemon-Touched Build*
