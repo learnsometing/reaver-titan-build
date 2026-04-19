@@ -85,4 +85,4 @@ See [docs/build-roadmap.md](docs/build-roadmap.md) for the full phase plan and o
 ## Tooling
 
 - **commitlint + husky** — conventional commit linting on pre-commit
-- **semantic-release** — changelog generation from commit history (changelog-only config; no version bumping or GitHub releases)
+- **changelogen** — changelog generation from commit history (changelog-only config; no version bumping or GitHub releases)
