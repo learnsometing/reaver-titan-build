@@ -10,7 +10,7 @@ Documentation and KiCad schematic files for a custom LED lighting system install
 
 | Directory / File | Contents |
 |-----------------|----------|
-| `docs/` | Design documentation — one file per zone plus build roadmap and schematic tracker |
+| `docs/` | Design documentation — one file per zone plus schematic tracker |
 | `kicad/` | KiCad 10 project files — schematic sheets, symbols, project config |
 | `CHANGELOG.md` | Design history derived from brief revision logs |
 
@@ -24,7 +24,6 @@ Documentation and KiCad schematic files for a custom LED lighting system install
 | [head.md](docs/head.md) | Head zones — fiber optic eyes, brain (3-channel pulse), red sensor eye, mouth, startup sequence |
 | [power-fist.md](docs/power-fist.md) | Left arm power fist — clear resin knuckles, channel 4 pulse effect |
 | [torso.md](docs/torso.md) | Torso cavity dimensions, component fit, connector strategy, mounting tray design, tank fire LED kit and wire routing |
-| [build-roadmap.md](docs/build-roadmap.md) | Three-phase build plan (breadboard → perfboard → custom PCB), torso PCB constraints, open items |
 | [schematic-progress.md](docs/schematic-progress.md) | KiCad session-by-session tracker — what's been placed, wired, and verified; locked electrical decisions |
 
 ### `kicad/`
@@ -78,7 +77,7 @@ Full details → [docs/power.md](docs/power.md)
 - [ ] One blaster MOSFET channel (Q1) verified
 - [ ] Web UI controlling LED rope brightness from phone
 
-See [docs/build-roadmap.md](docs/build-roadmap.md) for the full phase plan and open items.
+See the [Reaver Titan Build project](https://github.com/users/learnsometing/projects/2) for the full phase plan and open items.
 
 ---
 
