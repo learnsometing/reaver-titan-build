@@ -77,11 +77,10 @@ Each of the 5 blaster channels uses an IRLML6344 N-channel MOSFET (SOT-23 packag
 
 ## Bill of Materials — Blaster Zone
 
-Order alongside or immediately after the core power system BOM. LED rope is already on hand.
-
-| Component | Product | Qty | Source | Notes |
-|-----------|---------|-----|--------|-------|
-| **MOSFET** | IRLML6344TRPBF (Infineon, SOT-23) | 10–20 | Digi-Key | N-channel logic-level MOSFET, SOT-23. Fully switches at 3.3V gate, handles >4A drain. Buy genuine from Digi-Key — counterfeits common on Amazon. Digi-Key part: IRLML6344TRPBF. Buy 10–20 (tiny, easy to lose). |
-| **Series resistor** | TE Connectivity ROX1SJ6R8 (6.8Ω 1W metal oxide axial) | 10 | Digi-Key | One per blaster channel, 5 needed. 1W rating required — actual dissipation ~0.59W at 294mA. Buy 10 for spares. |
-| **Gate pull-down resistor** | 10kΩ ¼W carbon film | 5 | On hand | From Arduino starter kit. Dissipation only ~2.5mW — ¼W is ample. |
-| **LED rope** | Green silicone-sleeved LED rope, 1.5mm | 2 | On hand | Two fixed-length ropes, same supplier, same luminosity. Vf 2.7–3.1V, max 300mA confirmed from packaging. Cannot be cut — barrel and heatsink inserts will be designed around rope lengths. Measure actual Vf under load during prototyping and adjust series resistor if needed. |
+| Component | Product | Qty | Source | Status | Notes |
+|-----------|---------|-----|--------|--------|-------|
+| **MOSFET** | IRLML6344TRPBF (Infineon, SOT-23) | 10–20 | Digi-Key | On order | N-channel logic-level MOSFET, SOT-23. Fully switches at 3.3V gate, handles >4A drain. Buy genuine from Digi-Key — counterfeits common on Amazon. Digi-Key part: IRLML6344TRPBF. Buy 10–20 (tiny, easy to lose). |
+| **Series resistor** | TE Connectivity ROX1SJ6R8 (6.8Ω 1W metal oxide axial) | 10 | Digi-Key | On order | One per blaster channel, 5 needed. 1W rating required — actual dissipation ~0.59W at 294mA. Buy 10 for spares. |
+| **Gate pull-down resistor** | 10kΩ ¼W carbon film | 5 | On hand | Arrived | From Arduino starter kit. Dissipation only ~2.5mW — ¼W is ample. |
+| **Barrel LED rope** | Green silicone-sleeved LED rope, 1.5mm — 11.81" lengths | 3 | On hand | Arrived | One per barrel. Vf 2.7–3.1V, max 300mA. Cannot be cut — barrel inserts will be modelled around this length. Measure actual Vf under load and adjust series resistor if needed. |
+| **Heatsink LED rope** | Green silicone-sleeved LED rope, 1.5mm — 5.11" lengths | 4 | On hand | Arrived | One per heatsink zone (Ch 6–9). Same rope, same electronic properties as barrel rope. Cannot be cut — heatsink harness will be modelled around this length. |
