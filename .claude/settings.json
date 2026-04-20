@@ -1,0 +1,18 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"D:/Documents/github/reaver-titan-build/.claude/statusline-command.sh\" 2>/dev/null"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" auth status*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" project list*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" project item-list*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" issue list*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" pr list*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" pr view*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" pr status*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo view*)"
+    ]
+  }
+}

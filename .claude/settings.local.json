@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo *)",
+      "Bash(gh auth *)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" project list --owner learnsometing)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" issue list --repo learnsometing/reaver-titan-build)",
+      "Bash(git commit *)"
+    ]
+  }
+}

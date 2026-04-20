@@ -1,0 +1,8 @@
+# Default behavior: normalize line endings to LF in the repo
+* text=auto
+
+# Shell scripts must stay LF
+*.sh text eol=lf
+
+# JSON files: normalize
+*.json text eol=lf
