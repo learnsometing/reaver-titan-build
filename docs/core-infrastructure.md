@@ -1,4 +1,4 @@
-# Power & Control System
+# Core Infrastructure
 
 *Reaver Titan Lighting System — Emperor's Children Build*
 
@@ -17,11 +17,7 @@
 
 ### Power Chain
 
-```
-BT1 (LiPo) → J1 (T-connector) → U1 (BMS) → SW1 (switch) → U2 (buck) → +5V bus
-                                                                              │
-                                              U3 (ESP32-S3) + U4 (PCA9685) + D1 (tank fire) + all LED zones
-```
+![Power chain schematic](../kicad/power-chain.svg)
 
 ---
 
@@ -40,6 +36,26 @@ Power draw is approximately 150–250mA when WiFi is active. On the 2200mAh batt
 SunFounder PCA9685 16-channel PWM driver board, connected to the ESP32-S3 via I2C. Provides 16 independently controllable PWM channels with 12-bit resolution (0–4095), yielding smoother fading transitions than 8-bit PWM. Driven by the Adafruit PWM Servo Driver library (compatible with ESP32 Arduino framework).
 
 The PCA9685 runs at 5V on the common bus with 3.3V logic from the ESP32-S3 for I2C communication — the PCA9685 is 5V-compliant on its logic inputs. Default PWM frequency is approximately 1kHz (adjustable). A second PCA9685 can be daisy-chained if more than 16 channels are ever needed.
+
+#### Channel Map
+
+| Ch | Zone | Effect | Drive |
+|----|------|--------|-------|
+| 0 | Eyes (fiber optic) | Warm-up ramp, then static | Direct, 150Ω, ~20mA |
+| 1 | Brain A | Breathing pulse | TBD |
+| 2 | Brain B | Breathing pulse, offset | TBD |
+| 3 | Brain C | Breathing pulse, offset | TBD |
+| 4 | Power fist knuckles | Pulse | 100Ω/LED |
+| 5 | Blaster barrels | Multi-state firing | MOSFET IRLML6344, 6.8Ω 1W |
+| 6 | Blaster heatsink rear (gaps 1–3) | Multi-state firing | MOSFET |
+| 7 | Blaster heatsink mid-rear (gaps 4–5) | Multi-state firing | MOSFET |
+| 8 | Blaster heatsink mid-front (gaps 6–8) | Multi-state firing | MOSFET |
+| 9 | Blaster heatsink front (gaps 9–10) | Multi-state firing | MOSFET |
+| 10 | Sensor eye (red) | Static + periodic blink | Direct, 100Ω, ~20mA |
+| 11 | Mouth | Organic breathing rhythm | Direct, Evan Designs 5V chip LED |
+| 12–15 | Unassigned | — | Reserved |
+
+Tank fire LED kit (D1): direct 5V bus, no PCA9685 channel.
 
 ### Remote Control (Web UI)
 
@@ -68,53 +84,23 @@ Accessible from any device with a web browser — phone, tablet, or computer. No
 
 Components required to prototype the core power delivery and control system. Zone-specific components (LEDs, resistors, MOSFETs, LED rope) are listed in each zone doc.
 
-| Component | Product | Qty | Source | Notes |
-|-----------|---------|-----|--------|-------|
-| **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo, T-connector (2-pack) | 1 pack | Amazon | 73×34×18.5mm. Spare included for swap-out during extended display. |
-| **Balance charger** | SUPULSE B3 Pro 25W 2S/3S LiPo balance charger | 1 | Amazon | AC wall plug, JST-XH balance port, 2000mA charge rate. Red/green LED status. Charges battery externally. |
-| **LiPo safety bag** | Fireproof LiPo charging/storage bag | 1 | Amazon | Always charge and store LiPo batteries inside a fireproof bag. |
-| **BMS** | JZK 2S 7.4V 8A BMS protection board (5-pack) | 1 pack | Amazon | 41×16×3.5mm. Spares included. |
-| **Buck converter** | EBOOT MP1584EN DC-DC 3A adjustable buck converter (6-pack) | 1 pack | Amazon | 22×17×4mm. Set to 5V with potentiometer + multimeter before connecting anything. Spares included. |
-| **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
-| **PWM driver** | SunFounder PCA9685 16-channel 12-bit PWM driver board | 1 | Amazon | I2C, 5V logic compatible with 3.3V ESP32. Check for built-in series resistors on outputs. |
-| **T-connectors** | T-connector (Deans) male/female pairs, pre-wired 14 AWG (multi-pack) | 1 pack | Amazon | One pair for battery connection. Harvest 14 AWG wire from spare pairs for BMS-to-buck-converter runs. |
-| **Power switch** | Twidec L-PBS-110-XBK latching push button (4-pack) | 1 | Amazon | 7mm latching SPST, 3A 250V AC, pre-soldered wires. Mounted through torso exterior rectangular housing. Spares included in 4-pack. |
-| **Breadboard wire** | TUOFENG 22 AWG solid core hookup wire (6-color kit) | 1 kit | Amazon | Solid core for breadboard prototyping only. 30ft per color in dispensing box. |
-| **Breadboard** | Full-size solderless breadboard (830 tie points) | 1 | Amazon | Existing 300-point board is too small for ESP32 + PCA9685 + buck converter together. |
-| **Resistor assortment** | BOJACK 1000pcs 25-value ¼W assortment (B08FD1XVL6) | 1 | Amazon | Includes 100Ω and 150Ω needed for head zones. Covers all remaining ¼W resistor values for the full build. |
-| **Test LED + resistor** | 5mm green LED + 150Ω resistor | 1 each | On hand | From Arduino starter kit. Verifies PCA9685 output during core power-on test. |
+| Component | Product | Qty | Source | Status | Notes |
+|-----------|---------|-----|--------|--------|-------|
+| **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo, T-connector (2-pack) | 1 pack | Amazon | Arrived | 73×34×18.5mm. Spare included for swap-out during extended display. |
+| **Balance charger** | SUPULSE B3 Pro 25W 2S/3S LiPo balance charger | 1 | Amazon | ordered | AC wall plug, JST-XH balance port, 2000mA charge rate. Red/green LED status. Charges battery externally. |
+| **LiPo safety bag** | Fireproof LiPo charging/storage bag | 1 | Amazon | Arrived | Always charge and store LiPo batteries inside a fireproof bag. |
+| **BMS** | JZK 2S 7.4V 8A BMS protection board (5-pack) | 1 pack | Amazon | ordered | 41×16×3.5mm. Spares included. |
+| **Buck converter** | EBOOT MP1584EN DC-DC 3A adjustable buck converter (6-pack) | 1 pack | Amazon | Arrived | 22×17×4mm. Set to 5V with potentiometer + multimeter before connecting anything. Spares included. |
+| **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | ordered | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
+| **PWM driver** | SunFounder PCA9685 16-channel 12-bit PWM driver board | 1 | Amazon | Arrived | I2C, 5V logic compatible with 3.3V ESP32. Check for built-in series resistors on outputs. |
+| **T-connectors** | T-connector (Deans) male/female pairs, pre-wired 14 AWG (multi-pack) | 1 pack | Amazon | Arrived | One pair for battery connection. Harvest 14 AWG wire from spare pairs for BMS-to-buck-converter runs. |
+| **Power switch** | Twidec L-PBS-110-XBK latching push button (4-pack) | 1 | Amazon | Arrived | 7mm latching SPST, 3A 250V AC, pre-soldered wires. Mounted through torso exterior rectangular housing. Spares included in 4-pack. |
+| **Breadboard wire** | TUOFENG 22 AWG solid core hookup wire (6-color kit) | 1 kit | Amazon | Arrived | Solid core for breadboard prototyping only. 30ft per color in dispensing box. |
+| **Breadboard** | Full-size solderless breadboard (830 tie points) | 1 | Amazon | Arrived | Existing 300-point board is too small for ESP32 + PCA9685 + buck converter together. |
+| **Resistor assortment** | BOJACK 1000pcs 25-value ¼W assortment (B08FD1XVL6) | 1 | Amazon | Arrived | Includes 100Ω and 150Ω needed for head zones. Covers all remaining ¼W resistor values for the full build. |
+| **Test LED + resistor** | 5mm green LED + 150Ω resistor | 1 each | On hand | Arrived | From Arduino starter kit. Verifies PCA9685 output during core power-on test. |
 
 *Tools assumed on hand: soldering iron, solder, wire strippers, multimeter, small screwdriver (for buck converter potentiometer adjustment).*
 
 *Deferred purchases (buy when moving from breadboard to permanent build):* perfboard for junction board, male pin header strips, 22 AWG stranded silicone wire.
 
----
-
-## Prototyping Plan
-
-### Core Power-On Test (First Prototype)
-
-Goal: verify the entire power chain from battery to visible LED output on a breadboard.
-
-1. **Set up the buck converter.** Connect a bench supply or the LiPo (through BMS) to the MP1584 input. Adjust the potentiometer with a multimeter on the output until it reads 5.0V. Do this before connecting anything else.
-
-2. **Wire the breadboard.** Connect buck converter 5V output to the breadboard's red power rail, GND to the blue power rail.
-
-3. **Plug in the ESP32-S3.** Connect VIN to 5V rail, GND to GND rail. If it boots (onboard LED activity, USB serial output), the power chain works.
-
-4. **Plug in the PCA9685.** Connect VCC to 5V rail, GND to GND rail. Wire SDA and SCL from the ESP32-S3.
-
-5. **Connect a test LED.** Wire a 5mm green LED with a 150Ω resistor from one PCA9685 output channel to GND.
-
-6. **Upload a test sketch.** A simple program that fades the LED up and down using the Adafruit PWM library. Smooth fading validates the entire core system — battery, BMS, buck converter, ESP32-S3, I2C bus, and PCA9685 PWM output.
-
-7. **Test WiFi.** Extend the sketch to host a basic web page with a brightness slider. If you can control the LED brightness from your phone, remote control is validated.
-
-### Zone Prototyping Order
-
-1. Blaster arm — most complex: 5 channels, multi-state firing sequence, LED rope characterisation
-2. Brain — 3-channel organic pulse, sine wave tuning
-3. Head fiber optics — static, simplest zone
-4. Power fist — single channel pulse
-5. Tank fire kit — direct bus, verify inrush current
-6. Full integration and state machine coding
