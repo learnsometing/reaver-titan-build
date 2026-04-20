@@ -84,21 +84,21 @@ Accessible from any device with a web browser — phone, tablet, or computer. No
 
 Components required to prototype the core power delivery and control system. Zone-specific components (LEDs, resistors, MOSFETs, LED rope) are listed in each zone doc.
 
-| Component | Product | Qty | Source | Notes |
-|-----------|---------|-----|--------|-------|
-| **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo, T-connector (2-pack) | 1 pack | Amazon | 73×34×18.5mm. Spare included for swap-out during extended display. |
-| **Balance charger** | SUPULSE B3 Pro 25W 2S/3S LiPo balance charger | 1 | Amazon | AC wall plug, JST-XH balance port, 2000mA charge rate. Red/green LED status. Charges battery externally. |
-| **LiPo safety bag** | Fireproof LiPo charging/storage bag | 1 | Amazon | Always charge and store LiPo batteries inside a fireproof bag. |
-| **BMS** | JZK 2S 7.4V 8A BMS protection board (5-pack) | 1 pack | Amazon | 41×16×3.5mm. Spares included. |
-| **Buck converter** | EBOOT MP1584EN DC-DC 3A adjustable buck converter (6-pack) | 1 pack | Amazon | 22×17×4mm. Set to 5V with potentiometer + multimeter before connecting anything. Spares included. |
-| **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
-| **PWM driver** | SunFounder PCA9685 16-channel 12-bit PWM driver board | 1 | Amazon | I2C, 5V logic compatible with 3.3V ESP32. Check for built-in series resistors on outputs. |
-| **T-connectors** | T-connector (Deans) male/female pairs, pre-wired 14 AWG (multi-pack) | 1 pack | Amazon | One pair for battery connection. Harvest 14 AWG wire from spare pairs for BMS-to-buck-converter runs. |
-| **Power switch** | Twidec L-PBS-110-XBK latching push button (4-pack) | 1 | Amazon | 7mm latching SPST, 3A 250V AC, pre-soldered wires. Mounted through torso exterior rectangular housing. Spares included in 4-pack. |
-| **Breadboard wire** | TUOFENG 22 AWG solid core hookup wire (6-color kit) | 1 kit | Amazon | Solid core for breadboard prototyping only. 30ft per color in dispensing box. |
-| **Breadboard** | Full-size solderless breadboard (830 tie points) | 1 | Amazon | Existing 300-point board is too small for ESP32 + PCA9685 + buck converter together. |
-| **Resistor assortment** | BOJACK 1000pcs 25-value ¼W assortment (B08FD1XVL6) | 1 | Amazon | Includes 100Ω and 150Ω needed for head zones. Covers all remaining ¼W resistor values for the full build. |
-| **Test LED + resistor** | 5mm green LED + 150Ω resistor | 1 each | On hand | From Arduino starter kit. Verifies PCA9685 output during core power-on test. |
+| Component | Product | Qty | Source | Status | Notes |
+|-----------|---------|-----|--------|--------|-------|
+| **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo, T-connector (2-pack) | 1 pack | Amazon | Arrived | 73×34×18.5mm. Spare included for swap-out during extended display. |
+| **Balance charger** | SUPULSE B3 Pro 25W 2S/3S LiPo balance charger | 1 | Amazon | On order | AC wall plug, JST-XH balance port, 2000mA charge rate. Red/green LED status. Charges battery externally. |
+| **LiPo safety bag** | Fireproof LiPo charging/storage bag | 1 | Amazon | Arrived | Always charge and store LiPo batteries inside a fireproof bag. |
+| **BMS** | JZK 2S 7.4V 8A BMS protection board (5-pack) | 1 pack | Amazon | On order | 41×16×3.5mm. Spares included. |
+| **Buck converter** | EBOOT MP1584EN DC-DC 3A adjustable buck converter (6-pack) | 1 pack | Amazon | Arrived | 22×17×4mm. Set to 5V with potentiometer + multimeter before connecting anything. Spares included. |
+| **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | On order | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
+| **PWM driver** | SunFounder PCA9685 16-channel 12-bit PWM driver board | 1 | Amazon | Arrived | I2C, 5V logic compatible with 3.3V ESP32. Check for built-in series resistors on outputs. |
+| **T-connectors** | T-connector (Deans) male/female pairs, pre-wired 14 AWG (multi-pack) | 1 pack | Amazon | Arrived | One pair for battery connection. Harvest 14 AWG wire from spare pairs for BMS-to-buck-converter runs. |
+| **Power switch** | Twidec L-PBS-110-XBK latching push button (4-pack) | 1 | Amazon | Arrived | 7mm latching SPST, 3A 250V AC, pre-soldered wires. Mounted through torso exterior rectangular housing. Spares included in 4-pack. |
+| **Breadboard wire** | TUOFENG 22 AWG solid core hookup wire (6-color kit) | 1 kit | Amazon | Arrived | Solid core for breadboard prototyping only. 30ft per color in dispensing box. |
+| **Breadboard** | Full-size solderless breadboard (830 tie points) | 1 | Amazon | Arrived | Existing 300-point board is too small for ESP32 + PCA9685 + buck converter together. |
+| **Resistor assortment** | BOJACK 1000pcs 25-value ¼W assortment (B08FD1XVL6) | 1 | Amazon | Arrived | Includes 100Ω and 150Ω needed for head zones. Covers all remaining ¼W resistor values for the full build. |
+| **Test LED + resistor** | 5mm green LED + 150Ω resistor | 1 each | On hand | Arrived | From Arduino starter kit. Verifies PCA9685 output during core power-on test. |
 
 *Tools assumed on hand: soldering iron, solder, wire strippers, multimeter, small screwdriver (for buck converter potentiometer adjustment).*
 
