@@ -18,8 +18,8 @@ Documentation and KiCad schematic files for a custom LED lighting system install
 
 | File | Covers |
 |------|--------|
-| [README.md](docs/README.md) | Concept, system architecture, full PCA9685 channel map, links to all zone docs |
-| [power.md](docs/power.md) | Power system (battery, BMS, buck converter, switch), control system (ESP32-S3, PCA9685, web UI), wire gauge, core BOM, prototyping plan |
+| [core-infrastructure.md](docs/core-infrastructure.md) | Power system, control system (ESP32-S3, PCA9685), power chain diagram, channel map, wire gauge, core BOM |
+| [build-guide.md](docs/build-guide.md) | Core power-on test procedure and zone prototyping order |
 | [blaster.md](docs/blaster.md) | Laser blaster arm — barrels, heatsink zones, firing sequence (idle/prime/charge/discharge), MOSFET drive circuit, blaster BOM |
 | [head.md](docs/head.md) | Head zones — fiber optic eyes, brain (3-channel pulse), red sensor eye, mouth, startup sequence |
 | [power-fist.md](docs/power-fist.md) | Left arm power fist — clear resin knuckles, channel 4 pulse effect |
@@ -41,43 +41,9 @@ See [docs/schematic-progress.md](docs/schematic-progress.md) for current KiCad s
 
 ---
 
-## Electrical Overview
+## Build Progress
 
-```
-LiPo (7.4V) → BMS → latching switch → buck converter (5V) → common bus
-                                                                   │
-                                         ┌─────────────────────────┤
-                                         │                         │
-                                    ESP32-S3                   PCA9685
-                                  (WiFi web UI)           (16-ch PWM driver)
-                                         │                         │
-                                     I2C bus ───────────────────→  │
-                                                                    │
-                                                       LED zones (direct or via MOSFET)
-```
-
-- **Battery:** Zeee 2S 2200mAh 7.4V LiPo, T-connector (Deans)
-- **Protection:** JZK 2S 7.4V 8A BMS
-- **Regulation:** MP1584 buck converter → 5V bus
-- **Control:** ESP32-S3 Super Mini — dual-core, WiFi web server, I2C master
-- **PWM:** SunFounder PCA9685, 16 channels, 12-bit resolution
-- **High-current switching:** IRLML6344 N-channel MOSFETs (SOT-23) for LED rope channels
-- **All LEDs:** Green. Clear resin parts used throughout for diffusion.
-
-Full details → [docs/power.md](docs/power.md)
-
----
-
-## Build Status
-
-**Phase 1 — Breadboard prototype** · *Parts ordered, pending arrival*
-
-- [ ] Parts arrived and verified against BOM
-- [ ] Core power chain validated on breadboard
-- [ ] One blaster MOSFET channel (Q1) verified
-- [ ] Web UI controlling LED rope brightness from phone
-
-See the [Reaver Titan Build project](https://github.com/users/learnsometing/projects/2) for the full phase plan and open items.
+Open items, phase status, and upcoming work are tracked in the [Reaver Titan Build project](https://github.com/users/learnsometing/projects/2) on GitHub.
 
 ---
 
