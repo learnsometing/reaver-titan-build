@@ -416,13 +416,21 @@
         "uuid": "0d74efd3-466e-4c1e-9f95-c453eab9f65c"
       }
     ],
-    "used_designators": "SW1,R1-10,#FLG1-4,J2-3,D1,U5,Q1-5",
+    "used_designators": "#FLG4-9,R11-30,J2-3,D2-3,BT2-3,#PWR3-6,Q6-15,SW2-3,U5-12",
     "variants": []
   },
   "sheets": [
     [
       "0d74efd3-466e-4c1e-9f95-c453eab9f65c",
       "reaver-titan-lighting"
+    ],
+    [
+      "4df3f7a4-112a-49f1-864a-1075cde60079",
+      "Core Power"
+    ],
+    [
+      "8ee33085-13d2-4f2b-be8d-e6762f2ff668",
+      "Blaster Zones"
     ]
   ],
   "text_variables": {},

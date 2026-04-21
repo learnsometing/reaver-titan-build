@@ -3,7 +3,7 @@
 *Reaver Titan Lighting System — Emperor's Children Build*
 
 **KiCad version:** 10.0 (Windows)  
-**Schematic revision:** v1.4  
+**Schematic revision:** v1.5  
 **Brief ref:** v5.3
 
 This is a working document. It tracks what has been placed, wired, and verified in KiCad — session by session. It is not a design reference; design decisions live in the zone docs.
@@ -27,7 +27,7 @@ This is a working document. It tracks what has been placed, wired, and verified 
 
 ---
 
-## Sheet 1 — Core Power System
+## `core-power.kicad_sch` — Core Power System
 
 **Status: Complete. ERC: zero errors, zero warnings.**
 
@@ -69,9 +69,9 @@ BT1 → J1 → U1 (BMS) → SW1 → U2 (buck) → +5V bus
 
 ---
 
-## Sheet 2 — Blaster Zone (Channels 5–9)
+## `blaster-zones.kicad_sch` — Blaster Zone (Channels 5–9)
 
-**Status: Complete.**
+**Status: Complete. ERC: zero errors, zero warnings.**
 
 Five MOSFET channels, one per blaster zone. Circuit pattern repeated × 5:
 
