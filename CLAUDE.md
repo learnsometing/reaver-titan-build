@@ -27,6 +27,17 @@ gh issue create --title "..." --body "..."
 gh project item-add 2 --owner learnsometing --url <issue-url>
 ```
 
+After making changes, commit and push, then open a PR against `main` if one isn't already open:
+
+```bash
+git add <files>
+git commit -m "type: description"
+git push -u origin <branch>
+
+# Open PR if none exists for this branch
+gh pr create --title "..." --body "..." --base main
+```
+
 ## Repository Structure
 
 - `docs/` — One markdown file per lighting zone plus a schematic tracker. These are the authoritative design references for electrical decisions, component specs, and animation behavior.
