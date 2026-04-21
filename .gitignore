@@ -1,2 +1,5 @@
 node_modules
 kicad/.history
+kicad/~*.lck
+kicad/*-backups/
+kicad/*.prl
