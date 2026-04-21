@@ -28,14 +28,14 @@ Documentation and KiCad schematic files for a custom LED lighting system install
 
 ### `kicad/`
 
-KiCad 10 project files. The schematic is built in sheets:
+KiCad 10 project files. The root schematic (`reaver-titan-lighting.kicad_sch`) contains hierarchical sheet references:
 
-| Sheet | Status |
-|-------|--------|
-| Sheet 1 — Core power system | Complete (rev v1.4) |
-| Sheet 2 — Blaster zone (Ch 5–9) | Complete (rev v1.4) |
-| Sheet 3 — Head zones (Ch 0–3, 10–11) | Not started |
-| Sheet 4 — Power fist (Ch 4) | Not started |
+| File | Content | Status |
+|------|---------|--------|
+| `core-power.kicad_sch` | Core power system | Complete (v1.5, ERC clean) |
+| `blaster-zones.kicad_sch` | Blaster zone — 5 MOSFET channels (Ch 5–9) | Complete (v1.5, ERC clean) |
+| Head zones sheet | Head zones (Ch 0–3, 10–11) | Not started |
+| Power fist sheet | Power fist (Ch 4) | Not started |
 
 See [docs/schematic-progress.md](docs/schematic-progress.md) for current KiCad status and session notes.
 

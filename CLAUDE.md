@@ -46,12 +46,12 @@ gh pr create --title "..." --body "..." --base main
 
 ## KiCad Schematic Sheets
 
-| Sheet | Content | Status |
-|-------|---------|--------|
-| Sheet 1 | Core power system (battery → BMS → switch → buck → 5V bus, ESP32-S3, PCA9685) | Complete (v1.4, ERC clean) |
-| Sheet 2 | Blaster zone — 5 MOSFET channels (Ch 5–9) | Complete (v1.4) |
-| Sheet 3 | Head zones (Ch 0–3, 10–11) | Not started |
-| Sheet 4 | Power fist (Ch 4) | Not started |
+| File | Content | Status |
+|------|---------|--------|
+| `core-power.kicad_sch` | Core power system (battery → BMS → switch → buck → 5V bus, ESP32-S3, PCA9685) | Complete (v1.5, ERC clean) |
+| `blaster-zones.kicad_sch` | Blaster zone — 5 MOSFET channels (Ch 5–9) | Complete (v1.5, ERC clean) |
+| Head zones sheet | Head zones (Ch 0–3, 10–11) | Not started |
+| Power fist sheet | Power fist (Ch 4) | Not started |
 
 See `docs/schematic-progress.md` for session-by-session KiCad status, locked electrical decisions, and the full PCA9685 channel map.
 
