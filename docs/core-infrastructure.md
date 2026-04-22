@@ -15,9 +15,9 @@
 | **Bus** | Common 5V and GND bus throughout. |
 | **Runtime estimate** | Normal display mode (brain, eyes, tank fire, idle blaster, WiFi active): ~450–600mA draw, ~3–4 hours runtime. With blaster firing continuously: ~2.2A peak draw, ~1 hour runtime. Deep sleep (WiFi off, all LEDs off): <50μA, effectively unlimited standby. |
 
-### Power Chain
+### Core Infrastructure
 
-![Power chain schematic](../kicad/power-chain.svg)
+![Core infrastructure schematic](../kicad/core-infrastructure.svg)
 
 ---
 

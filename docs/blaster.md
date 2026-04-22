@@ -51,11 +51,11 @@ Barrels flash bright. The heatsink performs a fast rear-to-front pulse — a fin
 
 ---
 
-## MOSFET Drive Circuit
+## Schematic
 
 Each of the 5 blaster channels uses an IRLML6344 N-channel MOSFET (SOT-23 package) to switch the LED rope. The circuit per channel:
 
-![MOSFET drive circuit (single channel)](../kicad/mosfet-drive.svg)
+![Blaster zone schematic](../kicad/blaster.svg)
 
 **MOSFET:** IRLML6344 (SOT-23). Logic-level N-channel, fully switches on at 3.3V gate voltage, handles >4A continuous drain current. The SOT-23 footprint is compact enough to mount inside the arm or torso without significant space impact.
 
