@@ -43,28 +43,18 @@ This is a working document. It tracks what has been placed, wired, and verified 
 |-----|--------|-------|-------|
 | BT1 | Device:Battery | Zeee 2S 2200mAh 7.4V | Positive → +BATT, negative → GND |
 | J1 | Connector:Conn_01x02 | T-Connector Deans 14AWG | Pin 1 → +BATT, Pin 2 → GND |
-| U1 | Connector:Conn_01x04 | JZK 2S 7.4V 8A BMS | 4-pin generic module |
-| SW1 | SW_Push_Latching | Latching Push Button | Pin 1 → +PROT, Pin 2 → +SWITCHED |
+| SW1 | SW_Push_Latching | Latching Push Button | Pin 1 → +BATT, Pin 2 → +SWITCHED |
 | U2 | Connector:Conn_01x04 | MP1584 Buck Converter 5V | Pin 1 +SWITCHED, Pin 2 GND, Pin 3 +5V, Pin 4 GND |
 | U3 | Connector:Conn_01x04 | ESP32-S3 Super Mini | Pin 1 +5V, Pin 2 GND, Pin 3 I2C_SDA, Pin 4 I2C_SCL |
 | U4 | Connector:Conn_01x04 | PCA9685 16-ch PWM Driver | Pin 1 +5V, Pin 2 GND, Pin 3 I2C_SDA, Pin 4 I2C_SCL |
 | D1 | Device:LED | Evan Designs Tank Fire LED Kit 5V | Direct 5V bus, anode → +5V, cathode → GND |
 
-### Net Labels on U1 (BMS)
-
-| Pin | Net |
-|-----|-----|
-| 1 | +BATT |
-| 2 | GND |
-| 3 | +PROT |
-| 4 | GND |
-
 ### Power Chain (Complete)
 
 ```
-BT1 → J1 → U1 (BMS) → SW1 → U2 (buck) → +5V bus
-                                               │
-                              U3 (ESP32-S3) + U4 (PCA9685) + D1 (tank fire)
+BT1 → J1 → SW1 → U2 (buck) → +5V bus
+                                   │
+                  U3 (ESP32-S3) + U4 (PCA9685) + D1 (tank fire)
 ```
 
 ---
@@ -147,7 +137,6 @@ Tank fire LED kit (D1): direct 5V bus, no PCA9685 channel.
 | Decision | Value |
 |----------|-------|
 | Battery | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo, T-connector (Deans), 2-pack |
-| BMS | JZK 2S 7.4V 8A — over-charge, over-discharge, short circuit |
 | Connector | T-connector (Deans) — replaces JST |
 | Buck converter | MP1584 (3A) for prototype; upgrade to 5A module for final build |
 | MCU | ESP32-S3 Super Mini — WiFi web UI, dual-core, I2C to PCA9685 |

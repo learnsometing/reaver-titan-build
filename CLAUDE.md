@@ -48,7 +48,7 @@ gh pr create --title "..." --body "..." --base main
 
 | File | Content | Status |
 |------|---------|--------|
-| `core-infrastructure.kicad_sch` | Core infrastructure (battery → BMS → switch → buck → 5V bus, ESP32-S3, PCA9685) | Complete (v1.5, ERC clean) |
+| `core-infrastructure.kicad_sch` | Core infrastructure (battery → switch → buck → 5V bus, ESP32-S3, PCA9685) | Complete (v1.5, ERC clean) |
 | `blaster.kicad_sch` | Blaster zone — 5 MOSFET channels (Ch 5–9) | Complete (v1.5, ERC clean) |
 | Head zones sheet | Head zones (Ch 0–3, 10–11) | Not started |
 | Power fist sheet | Power fist (Ch 4) | Not started |
