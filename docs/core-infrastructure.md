@@ -8,10 +8,10 @@
 |-----------|---------------|
 | **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo (soft pack). Dimensions: 73mm × 34mm × 18.5mm, weight 98g. T-connector (Deans) discharge plug, JST-XH balance lead. Removable via torso access panel for external charging. 2-pack purchased — one spare for swap-out during extended display. |
 | **Connector** | T-connector (Deans) for battery-to-bus connection. Rated for high current, eliminates the JST undersizing concern flagged in earlier revisions. Internal bus wiring terminates in a matching T-connector for battery plug-in. |
-| **Protection** | JZK 2S 7.4V 8A BMS protection board (41mm × 16mm × 3.5mm). Over-charge protection (4.25–4.35V per cell), over-discharge protection (2.5–3.0V), short circuit protection, standby current <10μA. 8A continuous / 10A peak — provides ample headroom over estimated 2A peak system draw. |
+| **Protection** | No external BMS. The battery's internal protection handles shorts. A LiPo low-voltage alarm on the JST-XH balance lead provides per-cell overdischarge warning during use. Battery is always unplugged at the T-connector when not in use. |
 | **Charger** | 2S LiPo balance charger required (not included with battery). Must support JST-XH balance lead. Battery is removed from the model and charged externally. |
 | **Voltage regulation** | 5V buck converter, minimum 3A rated. A 5A-rated adjustable buck module is recommended for expansion headroom (current peak draw is approximately 2A, but additional zones will increase this). MP1584 (2–3A) is acceptable for prototyping; consider upgrading to a 5A module (e.g., D24V50F5 or similar) for the final build if total draw exceeds 2.5A. |
-| **Power switch** | Twidec L-PBS-110-XBK, 7mm latching push button, SPST, 3A 250V AC, pre-soldered wires. Mounted through the torso exterior rectangular housing (existing model feature). Indicator LED to be mounted in the domed feature on top of the same housing, wired to the +SWITCHED net via 270Ω resistor to glow green when system is on. Battery is still always physically unplugged at the T-connector when not in use (LiPo fire safety) — the switch is for convenience during display sessions only. |
+| **Power switch** | Twidec L-PBS-110-XBK, 7mm latching push button, SPST, 3A 250V AC, pre-soldered wires. Mounted through the torso exterior rectangular housing (existing model feature). Indicator LED to be mounted in the domed feature on top of the same housing, wired to the +SWITCHED net via 270Ω resistor to glow green when system is on. Battery is still always physically unplugged at the T-connector when not in use (LiPo fire safety) — the switch is for convenience during display sessions only. **Note:** pre-soldered leads are ~26 AWG (~1.5mm), too thin for the 7.4V side at 2.2A peak. Cut and replace with 14 AWG stranded wire soldered directly to the switch terminals. |
 | **Bus** | Common 5V and GND bus throughout. |
 | **Runtime estimate** | Normal display mode (brain, eyes, tank fire, idle blaster, WiFi active): ~450–600mA draw, ~3–4 hours runtime. With blaster firing continuously: ~2.2A peak draw, ~1 hour runtime. Deep sleep (WiFi off, all LEDs off): <50μA, effectively unlimited standby. |
 
@@ -75,7 +75,7 @@ Accessible from any device with a web browser — phone, tablet, or computer. No
 
 | Side | Gauge | Rationale |
 |------|-------|-----------|
-| 7.4V (battery → BMS → switch → buck input) | 14 AWG stranded silicone | Carries full system current at battery voltage. Pre-wired T-connector leads are typically 14 AWG. |
+| 7.4V (battery → switch → buck input) | 14 AWG stranded silicone | Carries full system current at battery voltage. Pre-wired T-connector leads are typically 14 AWG. |
 | 5V (buck output → bus → all zone runs) | 22 AWG stranded | Rated for ~3A, provides headroom over any single run's current demand. |
 
 ---
@@ -89,7 +89,7 @@ Components required to prototype the core power delivery and control system. Zon
 | **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo, T-connector (2-pack) | 1 pack | Amazon | Arrived | 73×34×18.5mm. Spare included for swap-out during extended display. |
 | **Balance charger** | SUPULSE B3 Pro 25W 2S/3S LiPo balance charger | 1 | Amazon | ordered | AC wall plug, JST-XH balance port, 2000mA charge rate. Red/green LED status. Charges battery externally. |
 | **LiPo safety bag** | Fireproof LiPo charging/storage bag | 1 | Amazon | Arrived | Always charge and store LiPo batteries inside a fireproof bag. |
-| **BMS** | JZK 2S 7.4V 8A BMS protection board (5-pack) | 1 pack | Amazon | Arrived | 41×16×3.5mm. Spares included. |
+| **Low-voltage alarm** | LiPo low-voltage alarm / cell checker (2S) | 1 | Amazon | To order | Plugs into JST-XH balance lead. Beeps when any cell drops below threshold (typically 3.5V). No wiring required. |
 | **Buck converter** | EBOOT MP1584EN DC-DC 3A adjustable buck converter (6-pack) | 1 pack | Amazon | Arrived | 22×17×4mm. Set to 5V with potentiometer + multimeter before connecting anything. Spares included. |
 | **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | ordered | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
 | **PWM driver** | SunFounder PCA9685 16-channel 12-bit PWM driver board | 1 | Amazon | Arrived | I2C, 5V logic compatible with 3.3V ESP32. Check for built-in series resistors on outputs. |

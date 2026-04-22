@@ -8,15 +8,14 @@ Goal: verify every electrical decision in the schematic before any permanent bui
 
 ### Step 1 — Set the Buck Converter to 5V
 
-**What you need:** buck converter module, bench supply or battery + BMS wired up, multimeter.
+**What you need:** buck converter module, battery, multimeter.
 
 Do this before connecting anything else to the buck converter output.
 
-1. Connect the battery T-connector to the BMS input leads (B+ and B−).
-2. Connect the BMS output leads (P+ and P−) to the buck converter IN+ and IN− pads.
-3. Temporarily bridge the switch terminals (or connect the switch in the on position).
-4. Place the multimeter probes on the buck converter OUT+ and OUT− pads.
-5. Adjust the buck converter potentiometer until the multimeter reads **5.0V**.
+1. Connect the battery T-connector leads directly to the buck converter IN+ and IN−.
+2. Place the multimeter probes on the buck converter OUT+ and OUT− pads.
+3. Adjust the buck converter potentiometer until the multimeter reads **5.0V**.
+4. Disconnect the battery.
 
 **Pass:** multimeter reads 5.0V ±0.1V on the buck output.
 
@@ -26,10 +25,10 @@ Do this before connecting anything else to the buck converter output.
 
 **What you need:** breadboard, 22 AWG solid core wire, buck converter (set to 5V from Step 1), power switch.
 
-1. Wire the power switch inline between the BMS P+ output and the buck converter IN+. BMS P− connects directly to buck IN−.
+1. Wire the power switch inline on the positive lead between the battery T-connector and buck converter IN+. Battery negative connects directly to buck IN−.
 2. Connect buck OUT+ to the breadboard red (+) power rail.
 3. Connect buck OUT− (GND) to the breadboard blue (−) power rail.
-4. Toggle the switch on. Place the multimeter probes on the breadboard power rails.
+4. Plug in the battery and toggle the switch on. Place the multimeter probes on the breadboard power rails.
 
 **Pass:** 5.0V ±0.1V across the breadboard power rails with the switch on. 0V with the switch off.
 
