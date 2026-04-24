@@ -2,7 +2,7 @@
 
 *Reaver Titan Lighting System — Emperor's Children Build*
 
-The laser blaster is the most complex lighting zone. It uses 5 PCA9685 channels (5–9) to create a multi-state firing sequence across the barrels and heatsink. Each channel is driven through an N-channel MOSFET since the LED rope segments draw up to 300mA, far exceeding the PCA9685's 25mA per-channel limit. The weapon body, barrels, and heatsink are printed in clear resin.
+The laser blaster is the most complex lighting zone. It uses 5 PCA9685 channels (5–9) to create a multi-state firing sequence across the barrels and heatsink. Each channel is driven through an N-channel MOSFET. The weapon body, barrels, and heatsink are printed in clear resin.
 
 ---
 
@@ -55,7 +55,7 @@ Barrels flash bright. The heatsink performs a fast rear-to-front pulse — a fin
 
 Each of the 5 blaster channels uses an IRLML6344 N-channel MOSFET (SOT-23 package) to switch the LED rope. The circuit per channel:
 
-**Why a MOSFET?** The PCA9685 is limited to 25mA per output channel. Each LED rope segment draws up to 300mA — roughly 12× over that limit. The MOSFET solves this by acting as a high-current switch: the PCA9685 controls the gate using only a tiny signal current, while the MOSFET handles the full LED load between drain and source. The controller stays safe; the MOSFET does the heavy lifting.
+**Why a MOSFET?** The PCA9685 is limited to 25mA per output channel. Each LED rope segment draws 30–100mA (72mA measured at 5V through 6.8Ω) — exceeding the 25mA limit. The MOSFET solves this by acting as a high-current switch: the PCA9685 controls the gate using only a tiny signal current, while the MOSFET handles the full LED load between drain and source. The controller stays safe; the MOSFET does the heavy lifting.
 
 ![Blaster zone schematic](../kicad/blaster.svg)
 
@@ -82,7 +82,7 @@ Each of the 5 blaster channels uses an IRLML6344 N-channel MOSFET (SOT-23 packag
 | Component | Product | Qty | Source | Status | Notes |
 |-----------|---------|-----|--------|--------|-------|
 | **MOSFET** | IRLML6344TRPBF (Infineon, SOT-23) | 10–20 | Digi-Key | Arrived | N-channel logic-level MOSFET, SOT-23. Fully switches at 3.3V gate, handles >4A drain. Buy genuine from Digi-Key — counterfeits common on Amazon. Digi-Key part: IRLML6344TRPBF. Buy 10–20 (tiny, easy to lose). |
-| **Series resistor** | TE Connectivity ROX1SJ6R8 (6.8Ω 1W metal oxide axial) | 10 | Digi-Key | Arrived | One per blaster channel, 5 needed. 1W rating required — actual dissipation ~0.59W at 294mA. Buy 10 for spares. |
+| **Series resistor** | TE Connectivity ROX1SJ6R8 (6.8Ω 1W metal oxide axial) | 10 | Digi-Key | Arrived | One per blaster channel, 5 needed. 1W rating provides large headroom — actual dissipation ~0.035W at 72mA measured draw. Buy 10 for spares. |
 | **Gate pull-down resistor** | 10kΩ ¼W carbon film | 5 | On hand | Arrived | From Arduino starter kit. Dissipation only ~2.5mW — ¼W is ample. |
 | **Barrel LED rope** | Green silicone-sleeved LED rope, 1.5mm — 11.81" lengths | 3 | On hand | Arrived | One per barrel. Vf 2.7–3.1V, max 300mA. Cannot be cut — barrel inserts will be modelled around this length. Measure actual Vf under load and adjust series resistor if needed. |
 | **Heatsink LED rope** | Green silicone-sleeved LED rope, 1.5mm — 5.11" lengths | 4 | On hand | Arrived | One per heatsink zone (Ch 6–9). Same rope, same electronic properties as barrel rope. Cannot be cut — heatsink harness will be modelled around this length. |
