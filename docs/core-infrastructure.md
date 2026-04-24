@@ -87,11 +87,11 @@ Components required to prototype the core power delivery and control system. Zon
 | Component | Product | Qty | Source | Status | Notes |
 |-----------|---------|-----|--------|--------|-------|
 | **Battery** | Zeee 2S 2200mAh 7.4V 50C Shorty LiPo, T-connector (2-pack) | 1 pack | Amazon | Arrived | 73×34×18.5mm. Spare included for swap-out during extended display. |
-| **Balance charger** | SUPULSE B3 Pro 25W 2S/3S LiPo balance charger | 1 | Amazon | ordered | AC wall plug, JST-XH balance port, 2000mA charge rate. Red/green LED status. Charges battery externally. |
+| **Balance charger** | SUPULSE B3 Pro 25W 2S/3S LiPo balance charger | 1 | Amazon | Arrived | AC wall plug, JST-XH balance port, 2000mA charge rate. Red/green LED status. Charges battery externally. |
 | **LiPo safety bag** | Fireproof LiPo charging/storage bag | 1 | Amazon | Arrived | Always charge and store LiPo batteries inside a fireproof bag. |
-| **Low-voltage alarm** | LiPo low-voltage alarm / cell checker (2S) | 1 | Amazon | To order | Plugs into JST-XH balance lead. Beeps when any cell drops below threshold (typically 3.5V). No wiring required. |
+| **Low-voltage alarm** | LiPo low-voltage alarm / cell checker (2S) | 1 | Amazon | Arrived | Plugs into JST-XH balance lead. Beeps when any cell drops below threshold (typically 3.5V). No wiring required. |
 | **Buck converter** | EBOOT MP1584EN DC-DC 3A adjustable buck converter (6-pack) | 1 pack | Amazon | Arrived | 22×17×4mm. Set to 5V with potentiometer + multimeter before connecting anything. Spares included. |
-| **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | ordered | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
+| **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | Arrived | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
 | **PWM driver** | SunFounder PCA9685 16-channel 12-bit PWM driver board | 1 | Amazon | Arrived | I2C, 5V logic compatible with 3.3V ESP32. Check for built-in series resistors on outputs. |
 | **T-connectors** | T-connector (Deans) male/female pairs, pre-wired 14 AWG (multi-pack) | 1 pack | Amazon | Arrived | One pair for battery connection. Harvest 14 AWG wire from spare pairs for switch-to-buck-converter runs. |
 | **Power switch** | Twidec L-PBS-110-XBK latching push button (4-pack) | 1 | Amazon | Arrived | 7mm latching SPST, 3A 250V AC, pre-soldered wires. Mounted through torso exterior rectangular housing. Spares included in 4-pack. |
