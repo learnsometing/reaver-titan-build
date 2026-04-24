@@ -39,7 +39,6 @@ Floor openings can be repositioned if the component layout requires it.
 | Battery | 73 × 34 × 18.5 | Top of stack | Sits on tray, lifts out from above |
 | ESP32-S3 Super Mini | 22.5 × 18 | Tray floor | Very compact, fits anywhere |
 | PCA9685 | ~25 × 62 | Tray floor | Main rectangular area |
-| BMS | 41 × 16 × 3.5 | Tray floor or wall | Very thin, tucks anywhere |
 | Buck converter | ~22 × 17 (MP1584) | Tray floor | Size may increase if upgraded to 5A module |
 
 Total tray footprint fits within the 63mm × 78mm main area with the 27mm notch available for overflow. Electronics on the tray floor (~20–25mm including boards and wiring clearance) plus the battery on top (18.5mm) totals ~40–43mm, leaving ~8mm clearance to the magnetic armour plate.
@@ -48,7 +47,7 @@ Total tray footprint fits within the 63mm × 78mm main area with the 27mm notch 
 
 ## Prototype Mounting Tray
 
-A 3D-printed mounting tray holds all electronics (ESP32-S3, PCA9685, BMS, buck converter) in fixed positions. The tray drops into the cavity as a single unit with clip-in or friction-fit component slots and wire routing channels. Zone Dupont connector headers face outward toward their respective wire exits.
+A 3D-printed mounting tray holds all electronics (ESP32-S3, PCA9685, buck converter) in fixed positions. The tray drops into the cavity as a single unit with clip-in or friction-fit component slots and wire routing channels. Zone Dupont connector headers face outward toward their respective wire exits.
 
 The battery sits on top of the tray, accessible immediately when the magnetic armour plate is removed.
 
@@ -67,7 +66,7 @@ The tray includes a small perfboard that serves as the central power and signal 
 - Dupont pin headers for each zone connector
 - MOSFET driver circuits for blaster channels (prototype phase)
 
-Zone headers face outward toward their respective wire exits. The T-connector from the battery connects to the BMS → switch → buck converter → junction board.
+Zone headers face outward toward their respective wire exits. The T-connector from the battery connects to the switch → buck converter → junction board.
 
 ---
 
