@@ -138,7 +138,7 @@ void loop() {
 
 Validate the battery → switch → buck → 5V rail chain independently of firmware work.
 
-#### Step B1 — Set the Buck Converter to 5V
+#### Step B1 — Set the Buck Converter to 5V ✓
 
 **What you need:** buck converter module, battery, multimeter.
 
@@ -153,7 +153,7 @@ Do this before connecting anything else to the buck converter output.
 
 ---
 
-#### Step B2 — Wire the Breadboard Power Rails
+#### Step B2 — Wire the Breadboard Power Rails ✓
 
 **What you need:** breadboard, 22 AWG solid core wire, buck converter (set to 5V from Step B1), power switch.
 
