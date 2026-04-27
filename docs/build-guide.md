@@ -75,6 +75,26 @@ Scan complete.
 
 ---
 
+#### Step A5 — Svelte UI Build and Flash
+
+**What you need:** Node.js installed, ESP32-S3 with LED wired from Step A3, phone or laptop with WiFi.
+
+**Depends on:** Step A4 passing, Track C Steps C1–C2 complete.
+
+1. From the project root, run the build:
+   ```bash
+   npm run ui:build
+   ```
+   This generates `firmware/ui/ui.h`, which the sketch includes via `../ui/ui.h`.
+2. Open and upload [`firmware/step-a5-web-ui-svelte/step-a5-web-ui-svelte.ino`](../firmware/step-a5-web-ui-svelte/step-a5-web-ui-svelte.ino).
+3. Connect to WiFi network **Reaver-Titan**, password **warmaster40k**.
+4. Open a browser and navigate to `192.168.4.1`.
+5. Drag the brightness slider. Tap zone toggles and blaster state buttons and confirm they log to the serial monitor.
+
+**Pass:** Brightness slider controls the LED in real time. Zone and blaster endpoints log to serial. The UI served is identical to `npm run ui:dev`.
+
+---
+
 ### Track B — Power Chain Verification
 
 Validate the battery → switch → buck → 5V rail chain independently of firmware work.
@@ -113,23 +133,32 @@ Do this before connecting anything else to the buck converter output.
 
 Prove out the development workflow for building the web UI as a proper Node.js project and bundling it into the Arduino sketch, so all future UI work can be done with a real browser dev environment instead of editing HTML strings in firmware.
 
-#### Step C1 — Framework Selection and Setup
+#### Step C1 — Framework Selection and Setup ✓
 
-*To be planned. See [issue #33](https://github.com/learnsometing/reaver-titan-build/issues/33).*
+Svelte + Vite scaffolded under `firmware/ui/`. Source lives there; root `package.json` gains `ui:dev` and `ui:build` scripts. All Svelte/Vite deps install at the project root — no nested `package.json`.
+
+- `npm run ui:dev` — starts Vite dev server at `localhost:5173` with hot reload and a mock ESP32 server that stubs all HTTP endpoints
+- `npm run ui:build` — bundles to a single inlined HTML file and runs `gen-ui-header.mjs` to write `firmware/step-a5-web-ui-svelte/ui.h`
+
+See [`firmware/ui/README.md`](../firmware/ui/README.md) for full aesthetic spec, zone map, and endpoint reference.
 
 ---
 
-#### Step C2 — Extract Web UI into Node.js Project
+#### Step C2 — Extract Web UI into Svelte Project ✓
 
-*To be planned.*
+Dark Mechanicus terminal UI built in `firmware/ui/src/App.svelte`. Replaces the inline HTML string from Step A4.
+
+- Brightness slider (0–4095) — drives `GET /brightness?v=X`, controls LED channel 0
+- Head / Torso zone toggles — `POST /zone/head` and `/zone/torso`
+- Laser Blaster weapon card — taps into blaster detail view with IDLE / PRIME / FULL CHARGE / DISCHARGE state buttons (`POST /blaster/state`)
 
 ---
 
 #### Step C3 — Build, Bundle, and Flash
 
-*To be planned.*
+See **Step A5** above. That step completes this track.
 
-**Pass:** LED brightness slider works identically to Step A4, but the HTML is now generated from the Node.js build rather than hand-written in the sketch.
+**Pass:** LED brightness slider works identically to Step A4, but the HTML is generated from the Svelte build rather than hand-written in the sketch.
 
 ---
 
