@@ -19,18 +19,7 @@ Validate firmware and component communication with the ESP32-S3 powered via USB 
 **What you need:** ESP32-S3 Super Mini, USB-C cable.
 
 1. Connect USB-C to your computer. Open a serial monitor at 115200 baud.
-2. Upload the following sketch:
-
-```cpp
-void setup() {
-  Serial.begin(115200);
-  delay(1000);
-  Serial.println("Reaver online.");
-}
-
-void loop() {
-}
-```
+2. Open and upload [`firmware/step-a1-hello-world/step-a1-hello-world.ino`](../firmware/step-a1-hello-world/step-a1-hello-world.ino).
 
 **Pass:** "Reaver online." visible in serial monitor.
 
@@ -40,36 +29,12 @@ void loop() {
 
 **What you need:** SunFounder PCA9685 board, breadboard, 4× jumper wires.
 
-1. Seat the ESP32-S3 and PCA9685 on the breadboard.
-2. Connect PCA9685 VCC to ESP32-S3 3V3 pin; PCA9685 GND to ESP32-S3 GND.
-3. Connect PCA9685 SDA to ESP32-S3 GPIO 8; SCL to GPIO 9.
-4. Upload the following sketch:
-
-```cpp
-#include <Wire.h>
-
-void setup() {
-  Serial.begin(115200);
-  delay(1000);
-  Wire.begin(8, 9);
-  Serial.println("Scanning I2C bus...");
-
-  for (byte address = 1; address < 127; address++) {
-    Wire.beginTransmission(address);
-    byte error = Wire.endTransmission();
-
-    if (error == 0) {
-      Serial.print("Device found at address 0x");
-      if (address < 16) Serial.print("0");
-      Serial.println(address, HEX);
-    }
-  }
-  Serial.println("Scan complete.");
-}
-
-void loop() {
-}
-```
+1. Seat the ESP32-S3 on the breadboard straddling the gap
+2. Place the PCA9685 next to the breadboard.
+3. Connect ESP32-S3 5V Pin to Red Rail, GND pin to Blue Rail
+4. Connect PCA9685 VCC to 5V Rail; PCA9685 GND to GND Rail.
+5. Connect PCA9685 SDA to ESP32-S3 GPIO 8; SCL to GPIO 9.
+6. Open and upload [`firmware/step-a2-i2c-scan/step-a2-i2c-scan.ino`](../firmware/step-a2-i2c-scan/step-a2-i2c-scan.ino).
 
 **Pass:** I2C scanner reports a device at address 0x40 (PCA9685 default). No other unexpected addresses.
 
@@ -88,35 +53,7 @@ Scan complete.
 
 1. Wire the 150Ω resistor from PCA9685 channel 0 output to the LED anode.
 2. Wire the LED cathode to GND.
-3. Upload the following sketch:
-
-```cpp
-#include <Wire.h>
-#include <Adafruit_PWMServoDriver.h>
-
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40);
-
-void setup() {
-  Serial.begin(115200);
-  Wire.begin(8, 9);
-  pwm.begin();
-  pwm.setPWMFreq(1000);
-  Serial.println("PCA9685 ready.");
-}
-
-void loop() {
-  // Fade up
-  for (int i = 0; i < 4096; i += 10) {
-    pwm.setPWM(0, 0, i);
-    delay(5);
-  }
-  // Fade down
-  for (int i = 4095; i >= 0; i -= 10) {
-    pwm.setPWM(0, 0, i);
-    delay(5);
-  }
-}
-```
+3. Open and upload [`firmware/step-a3-led-fade/step-a3-led-fade.ino`](../firmware/step-a3-led-fade/step-a3-led-fade.ino).
 
 **Pass:** LED fades smoothly from off to full brightness and back.
 
