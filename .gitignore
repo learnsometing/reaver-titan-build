@@ -3,3 +3,5 @@ kicad/.history
 kicad/~*.lck
 kicad/*-backups/
 kicad/*.prl
+firmware/ui/dist/
+firmware/ui/ui.h

@@ -9,7 +9,9 @@
   "scripts": {
     "changelog": "changelogen --output CHANGELOG.md",
     "test": "echo \"No tests yet\" && exit 0",
-    "prepare": "husky"
+    "prepare": "husky",
+    "ui:dev": "vite --config firmware/ui/vite.config.mjs",
+    "ui:build": "vite build --config firmware/ui/vite.config.mjs && node firmware/ui/scripts/gen-ui-header.mjs"
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,11 @@
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.0",
     "changelogen": "^0.6.2",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "svelte": "^5.0.0",
+    "vite": "^6.0.0",
+    "vite-plugin-singlefile": "^2.0.0"
   }
 }
