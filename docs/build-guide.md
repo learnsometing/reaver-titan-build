@@ -6,7 +6,7 @@
 
 Goal: verify every electrical decision in the schematic before any permanent build. Each step has an explicit pass/fail check — do not proceed to the next step until the current one passes.
 
-Phase 1 splits into two independent tracks that can be completed in either order.
+Phase 1 splits into three tracks. Tracks A and B can be completed in either order. Track C depends on Track A (Step A4 must pass first).
 
 ---
 
@@ -59,13 +59,17 @@ Scan complete.
 
 ---
 
-#### Step A4 — WiFi Web UI
+#### Step A4 — WiFi Web UI ✓
 
-**What you need:** phone or laptop with WiFi, ESP32-S3 running updated firmware.
+**What you need:** phone or laptop with WiFi, ESP32-S3 with LED wired from Step A3.
 
-1. Extend the Step A3 sketch to host a WiFi access point and a basic web page with a brightness slider for channel 0.
-2. Connect your phone to the ESP32-S3 access point.
-3. Open the web UI and adjust the slider.
+**Required library:** `WebServer` — included with the ESP32 Arduino core, no extra install needed.
+
+1. Open and upload [`firmware/step-a4-wifi-web-ui/step-a4-wifi-web-ui.ino`](../firmware/step-a4-wifi-web-ui/step-a4-wifi-web-ui.ino).
+2. Open the serial monitor at 115200 baud. Wait for `Web server ready.` and note the AP IP (default: `192.168.4.1`).
+3. On your phone, connect to WiFi network **Reaver-Titan**, password **warmaster40k**.
+4. Open a browser and navigate to `192.168.4.1`.
+5. Drag the brightness slider.
 
 **Pass:** LED brightness tracks the slider in real time with no flicker or lag. Access point appears within 10 seconds of power-on.
 
@@ -100,6 +104,32 @@ Do this before connecting anything else to the buck converter output.
 4. Plug in the battery and toggle the switch on. Place the multimeter probes on the breadboard power rails.
 
 **Pass:** 5.0V ±0.1V across the breadboard power rails with the switch on. 0V with the switch off.
+
+---
+
+### Track C — Node.js UI Workflow
+
+**Depends on:** Step A4 passing.
+
+Prove out the development workflow for building the web UI as a proper Node.js project and bundling it into the Arduino sketch, so all future UI work can be done with a real browser dev environment instead of editing HTML strings in firmware.
+
+#### Step C1 — Framework Selection and Setup
+
+*To be planned. See [issue #33](https://github.com/learnsometing/reaver-titan-build/issues/33).*
+
+---
+
+#### Step C2 — Extract Web UI into Node.js Project
+
+*To be planned.*
+
+---
+
+#### Step C3 — Build, Bundle, and Flash
+
+*To be planned.*
+
+**Pass:** LED brightness slider works identically to Step A4, but the HTML is now generated from the Node.js build rather than hand-written in the sketch.
 
 ---
 
