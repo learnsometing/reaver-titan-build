@@ -6,7 +6,7 @@
 
 Goal: verify every electrical decision in the schematic before any permanent build. Each step has an explicit pass/fail check — do not proceed to the next step until the current one passes.
 
-Phase 1 splits into three tracks. Tracks A and B can be completed in either order. Track C depends on Track A (Step A4 must pass first).
+Phase 1 splits into four tracks. Tracks A and B can be completed in either order. Track C depends on Track A (Step A4 must pass first). Track D depends on Track A (Step A3) and Track B (Step B2).
 
 ---
 
@@ -159,6 +159,37 @@ Dark Mechanicus terminal UI built in `firmware/ui/src/App.svelte`. Replaces the 
 See **Step A5** above. That step completes this track.
 
 **Pass:** LED brightness slider works identically to Step A4, but the HTML is generated from the Svelte build rather than hand-written in the sketch.
+
+---
+
+### Track D — MOSFET Zone Prototype
+
+**Depends on:** Step A3 (PCA9685 controlling LED via PWM) and Step B2 (5V power rails on breadboard).
+
+Validate the MOSFET driver circuit for a single heatsink zone before wiring all five blaster channels. Uses the SOT-23 DIP breakout to make the IRLML6344 breadboard-compatible.
+
+---
+
+#### Step D1 — Single MOSFET Heatsink Zone (Ch 6) ✓
+
+**What you need:** IRLML6344 soldered to SOT-23 DIP breakout board (with male headers), 10kΩ gate pull-down resistor, 6.8Ω 1W series resistor, one heatsink LED rope segment (5.11"), breadboard with 5V rails from Step B2, PCA9685 from Step A2.
+
+**Prep — assemble the breakout board:**
+1. Place the IRLML6344 on the SOT-23 breakout pads, orienting pin 1 (Gate) to pad G, pin 2 (Source) to pad S, pin 3 (Drain) to pad D. Solder all three pads.
+2. Solder male headers to the DIP through-hole pads. Let cool before handling.
+
+**Wire the circuit (5V rail → series resistor → LED rope → MOSFET → GND):**
+3. Seat the breakout board on the breadboard.
+4. Wire the 6.8Ω series resistor from the 5V rail to the LED rope anode (+).
+5. Connect the LED rope cathode (−) to the breakout Drain pad.
+6. Connect the breakout Source pad to the GND rail.
+7. Connect PCA9685 channel 6 output to the breakout Gate pad.
+8. Wire the 10kΩ pull-down resistor from the Gate pad to the GND rail.
+
+**Upload firmware:**
+9. Open and upload [`firmware/step-d1-mosfet-zone/step-d1-mosfet-zone.ino`](../firmware/step-d1-mosfet-zone/step-d1-mosfet-zone.ino).
+
+**Pass:** LED rope fades smoothly on channel 6 with no flicker at startup. Measure current with a multimeter in series on the LED rope — expect ~72mA at full brightness.
 
 ---
 
