@@ -6,7 +6,7 @@
 
 Goal: verify every electrical decision in the schematic before any permanent build. Each step has an explicit pass/fail check — do not proceed to the next step until the current one passes.
 
-Phase 1 splits into three tracks. Tracks A and B can be completed in either order. Track C depends on Track A (Step A4 must pass first).
+Phase 1 splits into four tracks. Tracks A and B can be completed in either order. Track C depends on Track A (Step A4 must pass first). Track D depends on Track A (Step A3) and Track B (Step B2).
 
 ---
 
@@ -159,6 +159,68 @@ Dark Mechanicus terminal UI built in `firmware/ui/src/App.svelte`. Replaces the 
 See **Step A5** above. That step completes this track.
 
 **Pass:** LED brightness slider works identically to Step A4, but the HTML is generated from the Svelte build rather than hand-written in the sketch.
+
+---
+
+### Track D — MOSFET Zone Prototype
+
+**Depends on:** Step A3 (PCA9685 controlling LED via PWM) and Step B2 (5V power rails on breadboard).
+
+Validate the MOSFET driver circuit for the blaster heatsink channels before committing to all five. Uses the SOT-23 DIP breakout to make the IRLML6344 breadboard-compatible.
+
+---
+
+#### Step D1 — Single MOSFET Heatsink Zone (Ch 6) ✓
+
+**What you need:** IRLML6344 soldered to SOT-23 DIP breakout board (with male headers), 10kΩ gate pull-down resistor, 6.8Ω 1W series resistor, one heatsink LED rope segment (5.11"), breadboard with 5V rails from Step B2, PCA9685 from Step A2.
+
+**Prep — assemble the breakout board:**
+1. Place the IRLML6344 on the SOT-23 breakout pads, orienting pin 1 (Gate) to pad G, pin 2 (Source) to pad S, pin 3 (Drain) to pad D. Solder all three pads.
+2. Solder male headers to the DIP through-hole pads. Let cool before handling.
+
+**Wire the circuit (5V rail → series resistor → LED rope → MOSFET → GND):**
+3. Seat the breakout board on the breadboard.
+4. Wire the 6.8Ω series resistor from the 5V rail to the LED rope anode (+).
+5. Connect the LED rope cathode (−) to the breakout Drain pad.
+6. Connect the breakout Source pad to the GND rail.
+7. Connect PCA9685 channel 6 output to the breakout Gate pad.
+8. Wire the 10kΩ pull-down resistor from the Gate pad to the GND rail.
+
+**Upload firmware:** Use the Step A5 sketch already on the board. Connect to Reaver-Titan and drag the brightness slider.
+
+**Pass:** LED rope fades smoothly on channel 6 with no flicker at startup. Measured current ~72mA at full brightness.
+
+---
+
+#### Step D2 — Two-Channel Heatsink Prototype (Ch 6 + Ch 7)
+
+**What you need:** Two complete MOSFET circuits from Step D1, wired to Ch 6 and Ch 7 respectively. Two heatsink LED rope segments (5.11" each).
+
+**Depends on:** Step D1 ✓ and Step A5 (Svelte UI built and `ui.h` generated).
+
+1. Wire the second MOSFET circuit identically to D1, with the gate connected to PCA9685 Ch 7.
+2. Run `npm run ui:build` to ensure `ui.h` is current.
+3. Open and upload [`firmware/step-d2-heatsink-prototype/step-d2-heatsink-prototype.ino`](../firmware/step-d2-heatsink-prototype/step-d2-heatsink-prototype.ino).
+4. Connect to Reaver-Titan, open `192.168.4.1`, tap the LASER BLASTER card.
+5. Step through all four states using the UI buttons.
+
+**Pass:** All four states transition correctly on both channels. DISCHARGE completes its animation and auto-returns to IDLE. No flicker at startup on either channel. ✓
+
+---
+
+#### Step D3 — Full Heatsink Prototype (Ch 6–9, in-model harness)
+
+**What you need:** Four complete MOSFET circuits (Ch 6–9), four heatsink LED rope segments (5.11" each), wiring harness sized to fit the 27mm internal heatsink diameter.
+
+Build a wiring harness for all four heatsink zones that can be seated inside the blaster body for in-model testing. Goal is to tune the firing sequence timing and brightness against the actual fin geometry and resin diffusion rather than on the open breadboard.
+
+1. Wire MOSFET circuits for Ch 8 and Ch 9 to match Ch 6 and Ch 7 from Step D2.
+2. Extend the step-d2 sketch to drive all four channels through the full firing sequence.
+3. Build the harness — route LED rope segments and signal/power leads to fit within the 27mm internal diameter.
+4. Seat the harness in the heatsink and connect to the breadboard.
+5. Step through all states via the UI and tune timing and brightness values against the model.
+
+**Pass:** Full four-zone firing sequence runs correctly inside the blaster. Effect looks right on the model.
 
 ---
 
