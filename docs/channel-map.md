@@ -58,7 +58,7 @@ Ch 0–5: left socket. Ch 6–11: right socket. All MOSFET-driven. See [arms.md]
 
 ## Open Items
 
-- Series resistor values for MOSFET-driven channels — blocked pending LED rope Vf measurement under load. Blaster confirmed at 6.8Ω (see blaster.md); applies to power fist, volcano cannon, melta cannon, chain fist, and exhaust vent
+- Series resistor values for remaining MOSFET-driven channels — blocked pending bench Vf measurement. Blaster confirmed (see blaster.md); applies to power fist, volcano cannon, melta cannon, chain fist, and exhaust vent
 - Brain LED count and type (Ch 13) — determines MOSFET requirement
 - Power indicator resistor value (Ch 14) — pending purple LED forward voltage spec
 - Display mode colour behaviour for power indicators — to be defined during firmware development

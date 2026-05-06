@@ -66,7 +66,7 @@ All weapons use the same 1.5mm silicone-sleeved LED rope (same supplier and spec
 
 The one exception is colour: the melta cannon uses orange rope to reflect its thermal/heat aesthetic. All other weapons use green rope consistent with the all-green lighting scheme.
 
-The series resistor value for the MOSFET circuit is pending a confirmed Vf measurement of the LED rope under load. Until that measurement is taken, do not finalise resistor values for any weapon. See blaster.md for current measured values.
+Inline resistors live inside the weapon arm and are sized per channel based on the number of ropes in parallel, so every rope sees the same current regardless of weapon or channel. The blaster arm inline resistor values are confirmed — see blaster.md. Resistor values for other weapons remain TBD pending the same bench measurement process.
 
 ---
 
@@ -142,4 +142,4 @@ Example — laser blaster (left) + laser blaster (right):
 
 - Design volcano cannon, melta cannon, chain fist lighting zones and document channel budgets
 - Confirm ID resistor voltage readings on the bench and set firmware ADC thresholds
-- Finalise series resistor value once Vf measurement is taken — applies to power fist, volcano cannon, melta cannon, chain fist. Blaster confirmed at 6.8Ω (see blaster.md)
+- Finalise inline resistor values for power fist, volcano cannon, melta cannon, chain fist — follow the same bench measurement process as blaster. Blaster confirmed: barrels 4.7Ω 2W, heatsink 13.6Ω (2× 6.8Ω 1W in series) — see blaster.md
