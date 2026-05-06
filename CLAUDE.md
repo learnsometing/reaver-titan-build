@@ -60,6 +60,6 @@ See `docs/schematic-progress.md` for session-by-session KiCad status, locked ele
 - **MOSFET:** IRLML6344 (SOT-23) for all high-current LED rope channels — fully switches at 3.3V gate
 - **Drive circuit:** 10kΩ gate pull-down to GND; series resistor (6.8Ω 1W) between +5V and LED rope anode
 - **PCA9685 limit:** 25mA per channel — any load above that requires MOSFET switching
-- **Wire gauge:** 14 AWG on 7.4V side, 22 AWG on 5V side
+- **Wire gauge:** Pre-wired 14 AWG T-connector leads on 7.4V side; Kynar 28 AWG OFHC (5A/36V rated) for all internal wiring
 - **Buck converter:** Set to 5V before connecting anything — adjustable via potentiometer
 - `docs/core-infrastructure.md` and `docs/blaster.md` are the primary references for component specs and circuit patterns

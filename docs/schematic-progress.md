@@ -141,7 +141,7 @@ Tank fire LED kit (D1): direct 5V bus, no PCA9685 channel.
 | Buck converter | MP1584 (3A) for prototype; upgrade to 5A module for final build |
 | MCU | ESP32-S3 Super Mini — WiFi web UI, dual-core, I2C to PCA9685 |
 | PWM driver | SunFounder PCA9685, 16-channel, 12-bit, I2C |
-| Wire gauge | 14 AWG silicone on 7.4V side; 22 AWG stranded on 5V side |
+| Wire gauge | Pre-wired 14 AWG T-connector leads on 7.4V side; Kynar 28 AWG OFHC (5A/36V rated) for all internal wiring |
 | MOSFET | IRLML6344 (SOT-23) for all high-current LED rope channels |
 | Power switch | Latching push button (SW1), torso exterior housing |
 | Tank fire | D1 (Device:LED), direct 5V bus |
