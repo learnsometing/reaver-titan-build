@@ -75,8 +75,8 @@ Accessible from any device with a web browser — phone, tablet, or computer. No
 
 | Side | Gauge | Rationale |
 |------|-------|-----------|
-| 7.4V (battery → switch → buck input) | 22 AWG stranded | Peak input current is ~1.75A at full load. All runs are short (a few centimetres inside the model) — voltage drop is negligible and 22 AWG's 3A rating provides ample headroom. The T-connector leads are pre-wired 14 AWG and stay as-is; 22 AWG picks up from there. |
-| 5V (buck output → bus → all zone runs) | 22 AWG stranded | Rated for ~3A, provides headroom over any single run's current demand. Longest zone run is ~16" (tank fire kit) at 60mA — voltage drop is under 10mV. |
+| 7.4V (battery → switch → buck input) | Pre-wired 14 AWG T-connector leads | T-connector leads stay as-is; no additional wiring on the 7.4V side beyond the connector. |
+| 5V and all internal wiring | Kynar 28 AWG (OFHC, 5A rated) | Rated 5A/36V; max per-channel current is ~380mA (capped by 1W/6.8Ω series resistor), well within spec. Thin OD routes easily through tight spaces in the model. Used for everything: 5V bus, MOSFET drain/source legs, I2C, gate drive. |
 
 ---
 
@@ -93,7 +93,7 @@ Components required to prototype the core power delivery and control system. Zon
 | **Buck converter** | EBOOT MP1584EN DC-DC 3A adjustable buck converter (6-pack) | 1 pack | Amazon | Arrived | 22×17×4mm. Set to 5V with potentiometer + multimeter before connecting anything. Spares included. |
 | **Microcontroller** | Waveshare ESP32-S3 Mini (pre-soldered headers) | 2 | Amazon | Arrived | Dual-core 240MHz, WiFi, BLE 5, USB-C. One for breadboard prototyping, one for final build. |
 | **PWM driver** | SunFounder PCA9685 16-channel 12-bit PWM driver board | 1 | Amazon | Arrived | I2C, 5V logic compatible with 3.3V ESP32. Check for built-in series resistors on outputs. |
-| **T-connectors** | T-connector (Deans) male/female pairs, pre-wired 14 AWG (multi-pack) | 1 pack | Amazon | Arrived | One pair for battery connection. The pre-wired 14 AWG leads stay as-is; all internal wiring from the connector onward uses 22 AWG. |
+| **T-connectors** | T-connector (Deans) male/female pairs, pre-wired 14 AWG (multi-pack) | 1 pack | Amazon | Arrived | One pair for battery connection. The pre-wired 14 AWG leads stay as-is; all internal wiring from the connector onward uses Kynar. |
 | **Power switch** | Twidec L-PBS-110-XBK latching push button (4-pack) | 1 | Amazon | Arrived | 7mm latching SPST, 3A 250V AC, pre-soldered wires. Mounted through torso exterior rectangular housing. Spares included in 4-pack. |
 | **Breadboard wire** | TUOFENG 22 AWG solid core hookup wire (6-color kit) | 1 kit | Amazon | Arrived | Solid core for breadboard prototyping only. 30ft per color in dispensing box. |
 | **Breadboard** | Full-size solderless breadboard (830 tie points) | 1 | Amazon | Arrived | Existing 300-point board is too small for ESP32 + PCA9685 + buck converter together. |
@@ -102,5 +102,5 @@ Components required to prototype the core power delivery and control system. Zon
 
 *Tools assumed on hand: soldering iron, solder, wire strippers, multimeter, small screwdriver (for buck converter potentiometer adjustment).*
 
-*Deferred purchases (buy when moving from breadboard to permanent build):* perfboard for junction board, male pin header strips, 22 AWG stranded silicone wire.
+*Deferred purchases (buy when moving from breadboard to permanent build):* perfboard for junction board, male pin header strips, Kynar 28 AWG OFHC wire (Evan Designs twisted Kynar, 5A/36V rated).
 

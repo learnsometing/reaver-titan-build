@@ -49,10 +49,10 @@ Ch 0–5: left socket. Ch 6–11: right socket. All MOSFET-driven. See [arms.md]
 
 *Quick reference — see [blaster.md](blaster.md) for zone descriptions and firing sequence.*
 
-| Socket | Barrels | Heatsink rear | Heatsink mid-rear | Heatsink mid | Heatsink mid-front | Heatsink front |
-| ------ | ------- | ------------- | ----------------- | ------------ | ------------------ | -------------- |
-| Left   | 0       | 1             | 2                 | 3            | 4                  | 5              |
-| Right  | 6       | 7             | 8                 | 9            | 10                 | 11             |
+| Socket | Barrels | Heatsink front | Heatsink mid-front | Heatsink mid | Heatsink mid-rear | Heatsink rear |
+| ------ | ------- | -------------- | ------------------ | ------------ | ----------------- | ------------- |
+| Left   | 0       | 1              | 2                  | 3            | 4                 | 5             |
+| Right  | 6       | 7              | 8                  | 9            | 10                | 11            |
 
 ---
 
