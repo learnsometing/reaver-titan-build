@@ -4,13 +4,13 @@
 #include <WebServer.h>
 #include <math.h>
 
-// Heatsink channels — rear to front
+// Heatsink channels — front to rear
 // Ch 0 (barrels) excluded from this prototype
-#define CH_REAR      1
-#define CH_MID_REAR  2
+#define CH_FRONT     1
+#define CH_MID_FRONT 2
 #define CH_MID       3
-#define CH_MID_FRONT 4
-#define CH_FRONT     5
+#define CH_MID_REAR  4
+#define CH_REAR      5
 
 #define IDLE_PWM  328    // ~8%
 #define FULL_PWM  4095
@@ -71,7 +71,7 @@ void tickDischarge() {
   unsigned long t = millis() - stateStart;
   bool done = true;
   for (int i = 0; i < 5; i++) {
-    int channel = 5 - i; // front first
+    int channel = i + 1; // front first (Ch 1)
     long elapsed = (long)t - i * 200L;
     uint16_t val;
     if (elapsed <= 0)        { val = FULL_PWM; done = false; }

@@ -26,11 +26,11 @@ The 10 gaps are grouped into 5 equal zones of 2 gaps each for directional animat
 
 | Zone | Gaps | Ch (left socket) | Ch (right socket) | Position |
 |------|------|-----------------|------------------|----------|
-| Rear | 1–2 | 1 | 7 | Reactor end (energy origin) |
-| Mid-rear | 3–4 | 2 | 8 | |
+| Front | 9–10 | 1 | 7 | Muzzle end (closest to barrels) |
+| Mid-front | 7–8 | 2 | 8 | |
 | Mid | 5–6 | 3 | 9 | |
-| Mid-front | 7–8 | 4 | 10 | |
-| Front | 9–10 | 5 | 11 | Muzzle end (closest to barrels) |
+| Mid-rear | 3–4 | 4 | 10 | |
+| Rear | 1–2 | 5 | 11 | Reactor end (energy origin) |
 
 ---
 
@@ -40,11 +40,11 @@ The heatsink houses the weapon's reactor. All energy originates at the rear and 
 
 ### IDLE
 
-Faint glow in the rear heatsink zone only (Ch 1, gaps 1–2). All other zones dark. The reactor is ticking over at standby power.
+Faint glow in the rear heatsink zone only (Ch 5, gaps 1–2). All other zones dark. The reactor is ticking over at standby power.
 
 ### PRIME
 
-Rear heatsink zone brightens. Energy propagates forward sequentially: rear (Ch 1) reaches full brightness first, then mid-rear (Ch 2), mid (Ch 3), mid-front (Ch 4), then front (Ch 5). Each zone reaches mid-brightness before the next begins — an overlapping forward surge. Barrels remain dark during this phase.
+Rear heatsink zone brightens. Energy propagates forward sequentially: rear (Ch 5) reaches full brightness first, then mid-rear (Ch 4), mid (Ch 3), mid-front (Ch 2), then front (Ch 1). Each zone reaches mid-brightness before the next begins — an overlapping forward surge. Barrels remain dark during this phase.
 
 ### FULL CHARGE
 

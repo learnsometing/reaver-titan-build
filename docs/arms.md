@@ -110,11 +110,11 @@ Example — laser blaster (left socket) + power fist (right socket):
 | Ch   | Assigned to  | Zone                    |
 | ---- | ------------ | ----------------------- |
 | 0    | Left socket  | Blaster barrels         |
-| 1    | Left socket  | Heatsink rear           |
-| 2    | Left socket  | Heatsink mid-rear       |
+| 1    | Left socket  | Heatsink front          |
+| 2    | Left socket  | Heatsink mid-front      |
 | 3    | Left socket  | Heatsink mid            |
-| 4    | Left socket  | Heatsink mid-front      |
-| 5    | Left socket  | Heatsink front          |
+| 4    | Left socket  | Heatsink mid-rear       |
+| 5    | Left socket  | Heatsink rear           |
 | 6    | Right socket | Power fist odd fingers  |
 | 7    | Right socket | Power fist even fingers |
 | 8–11 | Unassigned   | Idle                    |
@@ -124,17 +124,17 @@ Example — laser blaster (left) + laser blaster (right):
 | Ch  | Assigned to  | Zone               |
 | --- | ------------ | ------------------ |
 | 0   | Left socket  | Blaster barrels    |
-| 1   | Left socket  | Heatsink rear      |
-| 2   | Left socket  | Heatsink mid-rear  |
+| 1   | Left socket  | Heatsink front     |
+| 2   | Left socket  | Heatsink mid-front |
 | 3   | Left socket  | Heatsink mid       |
-| 4   | Left socket  | Heatsink mid-front |
-| 5   | Left socket  | Heatsink front     |
+| 4   | Left socket  | Heatsink mid-rear  |
+| 5   | Left socket  | Heatsink rear      |
 | 6   | Right socket | Blaster barrels    |
-| 7   | Right socket | Heatsink rear      |
-| 8   | Right socket | Heatsink mid-rear  |
+| 7   | Right socket | Heatsink front     |
+| 8   | Right socket | Heatsink mid-front |
 | 9   | Right socket | Heatsink mid       |
-| 10  | Right socket | Heatsink mid-front |
-| 11  | Right socket | Heatsink front     |
+| 10  | Right socket | Heatsink mid-rear  |
+| 11  | Right socket | Heatsink rear      |
 
 ---
 
