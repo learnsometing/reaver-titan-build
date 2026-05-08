@@ -10,11 +10,76 @@ Channel references below use left socket numbering (Ch 0–5). Substitute Ch 6�
 
 ---
 
+## Body
+
+### Dimensions
+
+| Feature | From (cap end) | Length | Notes |
+|---------|---------------|--------|-------|
+| Removable cap | 0mm | 7.5mm | Service access for heatsink harness — no wires exit here |
+| Cap gap | 7.5mm | 1mm | Clearance between cap and fins |
+| Heatsink fins | 8.5mm | 35.7mm | 33.6mm OD at gaps; 31.6mm OD at core extension |
+| Core extension | 44.2mm | 1.342mm | 31.6mm OD; protrudes past last fin, mates with hollow body |
+| Hollow body | 45.542mm | 81.458mm | Wire routing, inline resistors |
+| Barrel face | 127mm | — | Barrel assembly connects here |
+
+Total body length cap to barrel face: **127mm**.
+
+### Cross-Section (Forward of Heatsink)
+
+27mm × 41mm rectangle plus a cylinder centered on the bottom face, extending the full length of the hollow body to the barrel face. Two barrel bores sit in the upper rectangle (left and right), one barrel bore in the bottom cylinder — triangular arrangement matching the three-barrel layout.
+
+### Arm Connection
+
+Ring magnet (15mm OD, 10mm ID) recessed into the top face, centered at 70mm from the cap. All 9 wires (+5V, GND, ID, Ch_A–F) pass through the 10mm center hole into the arm. Arm-to-shoulder uses the same ring magnet design; may be a fixed joint if the rotational connection proves too weak.
+
+### Access Panel
+
+17mm × 35mm rectangular opening on the top face, from approximately 87.5mm to 124mm from the cap (beginning ~10mm forward of the ring magnet edge, stopping 3mm short of the barrel face). Provides wire management access to the forward hollow body section.
+
+### Wire Routing
+
+9 wires enter through the ring magnet hole at 70mm and route in both directions through the hollow body:
+
+- **Rearward (~24.5mm):** to the heatsink core front face at 45.542mm, then through the core interior to each zone
+- **Forward (~57mm):** to the barrel assembly JST connector at the barrel face
+
+Heatsink inline resistors (10× 6.8Ω 1W — 2 per zone × 5 zones) mount in the hollow body between the core front face (45.542mm) and the ring magnet near edge (~62.5mm). Accessible when the service cap is removed.
+
+---
+
 ## Barrels — Channel 0
 
-Three barrels, each approximately 7.1mm inner diameter. Lit by green LED rope (1.5mm overall diameter including green silicone diffusion sleeve, Vf 2.7–3.1V, max 300mA) wrapped around a helical core printed to fit inside the barrel. The silicone sleeve acts as a diffuser, producing a smooth continuous glow rather than visible point sources. All three barrels are driven as a single synchronised zone from Ch 0 via MOSFET driver.
+Three barrels arranged in a triangle (two upper, one lower), each with an 8mm bore. Lit by green LED rope (1.5mm overall diameter including green silicone diffusion sleeve, Vf 2.7–3.1V, max 300mA) wrapped around a printed helical core inside the barrel. The silicone sleeve diffuses light into a smooth continuous glow with no visible point sources. All three barrels are driven as a single synchronised zone from Ch 0 via MOSFET driver. LED rope cannot be cut — all insert designs are modelled around fixed rope lengths.
 
-A prototype helical core has been tested and confirmed to work at this diameter. LED rope is on hand and cannot be cut — insert designs will be modelled around fixed rope lengths.
+### Physical Design
+
+Each barrel is 105.9mm total. The clear diffusing section begins at 25.1mm from the breech.
+
+| Section | From (breech) | To | Length | Inner dia. | Notes |
+|---------|--------------|-----|--------|------------|-------|
+| Opaque mounting | 0mm | 25.1mm | 25.1mm | — | Connects to weapon body |
+| Main clear bore | 25.1mm | 75.9mm | 50.8mm | 8mm | Helical core seats here |
+| Helix section | 27.1mm | 75.1mm | 48mm | 8mm | Active rope coil |
+| 5.4mm bore | 75.9mm | 105.9mm | 30mm | 5.4mm | Existing feature; rope tail runs to tip |
+| Tapered section | 93.7mm | 105.9mm | 12.2mm | 5.4mm | OD tapers 12mm → 8.7mm |
+
+**Helical core parameters:**
+
+| Parameter | Value |
+|-----------|-------|
+| Core OD | 5mm |
+| Core wall | 1.5mm |
+| Central wire channel | 2mm diameter |
+| Barrel bore | 8mm |
+| Helix pitch | 3.63mm |
+| Gap between coils | 2.13mm |
+| Rope in helix | 270mm (~13 turns) |
+| Rope tail (into 5.4mm bore) | 30mm |
+
+Rope installs tip-first: the tip lead threads back through the 2mm central wire channel and exits at the breech end of the helix alongside the start lead. Both leads route through the 25.1mm opaque mounting section to the connection point inside the weapon body.
+
+**Assembly:** All three barrels form one removable assembly. A solid plug section (~7.8mm diameter) at the breech of each helical core seats in the 8mm barrel face bore. Magnets in the plug faces retain the assembly. A 2-pin JST connector just inside the barrel face carries the only two wires crossing the barrel-to-body interface: +5V and the Ch_A drain return (all three rope anodes and cathodes bundle together inside the assembly).
 
 ---
 
@@ -31,6 +96,54 @@ The 10 gaps are grouped into 5 equal zones of 2 gaps each for directional animat
 | Mid | 5–6 | 3 | 9 | |
 | Mid-rear | 3–4 | 4 | 10 | |
 | Rear | 1–2 | 5 | 11 | Reactor end (energy origin) |
+
+### Physical Design
+
+**Heatsink cylinder:** 33.6mm OD at fin gaps; 31.6mm OD at core extension; fins arrayed on the outside.
+
+**Bore:** D-shaped, 29.64mm diameter — matched to removable cap OD. D-flat offset 2mm from top, chord ~14.87mm. D-flat faces up (same side as ring magnet), aligned with the horseshoe opening of the core.
+
+**Core (wiring harness):** Horseshoe-shaped, 29mm OD. Open on the top face (same side as ring magnet), with arms angling inward at 45° to partially close the gap — giving direct access to the fully open hollow interior for wire and rope end routing. Interior runs open the full length with no bridges between zones; rope ends from each annular slot route through the horseshoe opening into the interior. Extends fully through all five zones plus 1.342mm past the fins to mate with the body (~37.042mm total length).
+
+| Feature | Value |
+|---------|-------|
+| OD | 29mm |
+| Wall thickness | 3mm |
+| Hollow interior diameter | 23mm |
+| D-flat chord width | ~14.7mm |
+| D-flat offset from top | 2mm |
+| Opening position | Top face |
+| Arm inward angle | 45° |
+
+**Fins and gaps:**
+
+| Feature | Value |
+|---------|-------|
+| Total fin array length | 35.7mm |
+| Fins | 11 × 1.75mm wide |
+| Gaps | 10 × 1.645mm wide |
+| Zone count | 5 (2 gaps per zone) |
+| Zone pitch (slot center to slot center) | 6.79mm |
+
+**Annular rope slots:** One slot per zone, centered on the middle fin of each zone's gap pair. Rope sits 0.5mm proud of the core OD.
+
+| Feature | Value |
+|---------|-------|
+| Width | 2mm |
+| Depth | 1mm |
+| Count | 5 (one per zone) |
+
+**Slot positions:**
+
+| Zone | From core front face | From cap |
+|------|---------------------|---------|
+| Front | 4.27mm | 12.77mm |
+| Mid-front | 11.06mm | 19.56mm |
+| Mid | 17.85mm | 26.35mm |
+| Mid-rear | 24.64mm | 33.14mm |
+| Rear | 31.43mm | 39.93mm |
+
+**Wire exits:** 6 wires exit the core front face into the hollow body: 1 shared +5V trunk and 5 individual drain returns (Ch 1–5).
 
 ---
 
