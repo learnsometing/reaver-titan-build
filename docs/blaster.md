@@ -145,6 +145,10 @@ The 10 gaps are grouped into 5 equal zones of 2 gaps each for directional animat
 
 **Wire exits:** 6 wires exit the core front face into the hollow body: 1 shared +5V trunk and 5 individual drain returns (Ch 1–5).
 
+**Prototype validation (v1):** Fit confirmed — core seats in bore with adequate clearance. Rope sits in annular slots against the bore wall, providing good light contact into the fin gaps. Rope end slack from each zone crosses inside the horseshoe opening in an X pattern; manageable at this stage.
+
+**Rope end retention (next iteration):** Alternating arches or tabs spanning the horseshoe opening will be added to the core to hold the X-crossed rope ends in place. Count and spacing TBD.
+
 ---
 
 ## Firing Sequence
