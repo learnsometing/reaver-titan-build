@@ -147,7 +147,24 @@ The 10 gaps are grouped into 5 equal zones of 2 gaps each for directional animat
 
 **Prototype validation (v1):** Fit confirmed — core seats in bore with adequate clearance. Rope sits in annular slots against the bore wall, providing good light contact into the fin gaps. Rope end slack from each zone crosses inside the horseshoe opening in an X pattern; manageable at this stage.
 
-**Rope end retention (next iteration):** Alternating arches or tabs spanning the horseshoe opening will be added to the core to hold the X-crossed rope ends in place. Count and spacing TBD.
+**Rope end retention:** Staggered 2.5mm holes on the horseshoe arm ends, offset 2.5mm from each annular slot. Rope ends cross and thread through the holes into the hollow interior, where they continue coiling. Stagger prevents adjacent zones from crowding the same axial position on the arm.
+
+### Wiring Harness
+
+6 wires exit the core front face: 1 shared +5V trunk and 5 individual drain returns (Ch 1–5). Each terminates in a single-pin breakaway connector (Evan Designs style, clipped to single pin) for connection to 6 female wires permanently routed through the arm to the torso MOSFET board.
+
+**Construction order (per zone):**
+
+1. Thread wire through 2.5mm retention hole before soldering
+2. Solder wire to rope anode lead
+3. Solder 2× 6.8Ω 1W in series inline on the anode wire
+4. Repeat for all 5 zones
+5. Bundle all 5 resistor outputs together — solder to single +5V pin connector
+6. Solder each rope cathode lead to its own wire — individual pin connector per zone (label Ch 1–5 front to rear)
+
+Resistors run at ~16% of rated dissipation; bundling and heat shrinking is safe. Leave a small air gap between the bundle and the resin body wall.
+
+**Bench validation:** All 5 zones confirmed working with step-d5 firmware (Ch 1–5). Note: step-d5 does not drive Ch 0 — heatsink zones must be wired to Ch 1–5 on the PCA9685.
 
 ---
 
